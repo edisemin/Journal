@@ -1,0 +1,20 @@
+body {
+    background-color: grey;
+}
+
+header {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.title {
+    font-family: 'Tangerine', cursive;
+    font-size: 2rem;
+}
+
+.book {
+    width: 3.75rem;
+    height: 4.38rem;
+    padding-right: 1rem;
+}
