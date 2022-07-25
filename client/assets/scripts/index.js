@@ -26,7 +26,7 @@ function PostData(form) {
 
 
 ///// This function adds elements and the data returned from the server
-function addElements () {
+function addElements (data) {
    
 
    let commentContainer = document.createElement("div");
@@ -35,7 +35,6 @@ function addElements () {
 
    <input name='userpost' type="text" class="inputTwo" placeholder='write a comment ...'required>
    <button type="submit" id='btn'>Post Comment</button></form>` 
-
    return commentForm
 
 }
@@ -74,16 +73,46 @@ const url = "https://community-journaling.herokuapp.com";
 
 
 /// planning on using this function to make a get request 
-async function getData() {
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    
-    console.log(data[1].body)
-  } catch (error) {
-    alert("Sorry! Your request could not be granted!");
+
+
+function loadInitialPage (data) {
+  const blogLength = Object.keys(data).length
+  for (let i = 1; i <= blogLength; i++) {
+    let commentContainer = document.createElement("div");
+
+    const commentForm = commentContainer.innerHTML =  `<p>${data[i]['body']}</p><form id='form'>
+
+   <input name='userpost' type="text" class="inputTwo" placeholder='write a comment ...'required>
+   <button type="submit" id='btn'>Post Comment</button></form>` 
+   console.log('commentform: ', commentContainer)
+   document.getElementById('blog-posts').appendChild(commentContainer)
   }
+
 }
+
+function getData() {
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      loadInitialPage(data)
+    })
+    .catch(err => {
+      alert("Sorry! Your request could not be granted!", err)
+    })
+}
+
+// async function getData() {
+//   try {
+//     const response = fetch(url);
+//     const data = await response.json();
+    
+//     console.log(data[1].body)
+//   } catch (error) {
+//     alert("Sorry! Your request could not be granted!");
+//   }
+// }
 
 getData()
 
