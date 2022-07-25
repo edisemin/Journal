@@ -74,20 +74,48 @@ const url = "https://community-journaling.herokuapp.com";
 
 /// planning on using this function to make a get request 
 
+function postComment() {
 
+}
+
+/********************************************************************** This is for trying methods (not working now) */
 function loadInitialPage (data) {
   const blogLength = Object.keys(data).length
   for (let i = 1; i <= blogLength; i++) {
     let commentContainer = document.createElement("div");
+    commentContainer.innerHTML =  `<p class='content'>${data[i]['body']}<form id='form-${i}'>
 
-    const commentForm = commentContainer.innerHTML =  `<p>${data[i]['body']}</p><form id='form'>
-
-   <input name='userpost' type="text" class="inputTwo" placeholder='write a comment ...'required>
-   <button type="submit" id='btn'>Post Comment</button></form>` 
-   console.log('commentform: ', commentContainer)
+   <input name='userpost-${i}' type="text" class="inputTwo" placeholder='write a comment ...'required>
+   <button type="submit" id='btn-${i}'>Post Comment</button></form></p>`
    document.getElementById('blog-posts').appendChild(commentContainer)
-  }
 
+   document.getElementById(`btn-${i}`).addEventListener('click', () => {
+    console.log(`The button ${i} was clicked`);
+    const form = document.getElementById(`form-${i}`)
+    const prePayload = new FormData(form);
+    const payload = new URLSearchParams(prePayload);
+
+    console.log([...payload]);
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://localhost:3000", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send([...payload]);
+
+
+  //  fetch('http://localhost:3000/', {
+  //   method: "post",
+  //   body: payload,
+  // })
+  //   .then((res) => {
+  //     console.log('res: ', res)
+  //     res.json()
+  //   })
+  //   .then((data) => console.log('how does the data look like after fetching: ', data))
+  //   .catch((err) => console.log('Error while post fetching: ', err));
+/********************************************************************************************* End of trying block*/
+   })
+  }
 }
 
 function getData() {
@@ -95,7 +123,7 @@ function getData() {
   fetch(url)
     .then(res => res.json())
     .then(data => {
-      console.log(data);
+      // console.log(data);
       loadInitialPage(data)
     })
     .catch(err => {
