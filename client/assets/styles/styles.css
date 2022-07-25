@@ -1,11 +1,19 @@
 body {
+    margin: 0;
     background-color: grey;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 header {
     background-color: white;
     display: flex;
+    width: 100%;
     justify-content: center;
+    margin: 0;
 }
 
 .title {
@@ -17,4 +25,46 @@ header {
     width: 3.75rem;
     height: 4.38rem;
     padding-right: 1rem;
+}
+
+.input-box {
+    background-color: white;
+    width: 80%;
+    padding-bottom: 10px;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 2px 3px 3px 3px darkgray;}
+
+.search-bar {
+    background-color: lightgrey;
+    width: 500px;
+    height: 30px;
+    padding-left: 15px;
+    margin-bottom: 20px;
+    border-radius: 45px;
+    border: 1px solid #d3d3d3;
+}
+
+.posted-box {
+    background-color: white;
+    width: 80%;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 2px 3px 3px 3px darkgrey;
+}
+
+.buttons {
+    padding-bottom: 0.25rem;
+    padding-top: 1rem;
+}
+
+footer {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
