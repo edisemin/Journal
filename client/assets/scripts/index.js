@@ -132,72 +132,60 @@ function loadInitialPage (data) {
     submitButton.textContent = 'Reply'
     replyForm.appendChild(submitButton)
 
-    if (!data[i]['like']['is-there']) {
-      console.log('There is no like emoji')
+    // const fakeForm = document.createElement('form')
+    // blogPostContainer.appendChild(fakeForm)
+    
+    // const fakeInput = document.createElement('input')
+    // fakeForm.appendChild(fakeInput)
+    // fakeInput.setAttribute('name', `fake-like-input-${i}`)
+    // fakeInput.setAttribute('class', `fake-inputs`)
+    // fakeInput.setAttribute('value', `fake-content-${i}`)
 
-            const fakeForm = document.createElement('form')
-            blogPostContainer.appendChild(fakeForm)
+    const likeButton = document.createElement('button')
+    replyForm.appendChild(likeButton)
+    likeButton.setAttribute('type', 'submit')
+    likeButton.setAttribute('id', `like-button-${i}`)
+    likeButton.textContent = 'Like'
 
-            const fakeInput = document.createElement('input')
-            fakeForm.appendChild(fakeInput)
-            fakeInput.setAttribute('name', `fake-input-${i}`)
-            fakeInput.setAttribute('class', `fake-inputs`)
-            fakeInput.setAttribute('value', `fake-content-${i}`)
+    const createLikeEmoji = document.createElement('img')
+    createLikeEmoji.setAttribute('src', '/client/assets/emojis/like.svg')
+    createLikeEmoji.setAttribute('class', 'svg-like')
 
-            const likeButton = document.createElement('button')
-            fakeForm.appendChild(likeButton)
-            likeButton.setAttribute('type', 'submit')
-            likeButton.setAttribute('id', `like-button-${i}`)
-            likeButton.textContent = 'Like'
+        const likeCounter = document.createElement('div')
+        blogPostContainer.appendChild(likeCounter)
+        likeCounter.setAttribute('class', 'like-counter')
+        likeCounter.textContent = data[i]['like']['number']
 
-             document.getElementById(`like-button-${i}`).addEventListener('click', 
+      if (!data[i]['like']['is-there']) {
+      console.log('There is no "like" emoji')
+              
+      document.getElementById(`like-button-${i}`).addEventListener('click', 
                 function addLike() {
-                  const createLikeEmoji = document.createElement('img')
-                  fakeForm.appendChild(createLikeEmoji)
-                  createLikeEmoji.setAttribute('src', '/client/assets/emojis/like.svg')
-                  createLikeEmoji.setAttribute('class', 'svg-like')
+                console.log('im within addLike function')
+                replyForm.appendChild(createLikeEmoji)
                   
-                const prePayload = new FormData(fakeForm);
-                const payload = new URLSearchParams(prePayload);
+          const http = new XMLHttpRequest();
+          
+          const params = `like-button-${i}=clicked`;
+          console.log('params:', params) //*****
+          http.open('POST', url, true);
+          console.log('after the http open') //*****
 
-                  fetch(url, {
-                  method: "post",
-                  body: payload,
-                  })
-                  .then((res) => res.json())
-                  .then((data) => console.log('how does the data look like after fetching: ', data))
-                  .catch((err) => console.log('Error while post fetching: ', err));
-                  window.location.reload()
+          //Send the proper header information along with the request
+          http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+          http.onreadystatechange = function() {//Call a function when the state changes.
+              if(http.readyState == 4 && http.status == 200) {
+                  alert(http.responseText);
+              }
+          }
+          http.send(params);
 
                 }
             )
-
-
-            const likeCounter = document.createElement('div')
-            blogPostContainer.appendChild(likeCounter)
-            likeCounter.setAttribute('class', 'like-counter')
-            likeCounter.textContent = data[i]['like']['number']
-
-
-
-            
-            // const xhr = new XMLHttpRequest();
-            // xhr.open("POST", url, false);
-            // xhr.responseType = 'text'
-            // document.getElementById(`svg-like-${i}-blogpost`).addEventListener('click',
-            //   async function addLike() {
-            //     console.log(`like-counter-${i}-blogpost button clicked`);
-            //     // xhr.onload = // something
-
-            //     await xhr.send('like-button-clicked')
-            //   }
-            // )
-
-                // const prePayload = new FormData(replyForm);
-                // const payload = new URLSearchParams(prePayload);
-              
                
-    }
+    } else {
+        likeCounter.textContent = data[i]['like']['number'] + 1
+      }
     
 
    document.getElementById(`btn-${i}`).addEventListener('click',
