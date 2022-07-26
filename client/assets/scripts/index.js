@@ -2,10 +2,13 @@
 const form = document.querySelector(".form_main");
 const input = document.querySelector(".input");
 const main = document.querySelector('#blog-posts')
+const newPostButton = document.getElementById('btn-two')
 
 console.log('hello')
 
 document.addEventListener('submit', (e)=> e.preventDefault())
+newPostButton.addEventListener('click', writeNewPost)
+
     
 
 ///// this will post data to the server////////////////////////
@@ -80,16 +83,16 @@ function writeNewPost() {
    const prePayload = new FormData(form);
    const payload = new URLSearchParams(prePayload);
 
-   //console.log([...payload]);
+   console.log([...payload]);
 
-   fetch('http://localhost:3000/', {
+   fetch(url, {
     method: "post",
-    body: payload,
+    body: payload,        // ['userpost', 'the new post here']
     })
     .then((res) => res.json())
-    .then((data) => console.log(data))
+    .then((data) => console.log('newBlogPost entry data here: ', data))
     .catch((err) => console.log(err));
-
+    window.location.reload()
 }
 
 /********************************************************************** This is for trying methods (not working now) */
@@ -135,7 +138,7 @@ function loadInitialPage (data) {
      const prePayload = new FormData(replyForm);
      const payload = new URLSearchParams(prePayload);
    
-     fetch('https://community-journaling.herokuapp.com/', {
+     fetch(url, {
       method: "post",
       body: payload,
      })
