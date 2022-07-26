@@ -132,6 +132,74 @@ function loadInitialPage (data) {
     submitButton.textContent = 'Reply'
     replyForm.appendChild(submitButton)
 
+    if (!data[i]['like']['is-there']) {
+      console.log('There is no like emoji')
+
+            const fakeForm = document.createElement('form')
+            blogPostContainer.appendChild(fakeForm)
+
+            const fakeInput = document.createElement('input')
+            fakeForm.appendChild(fakeInput)
+            fakeInput.setAttribute('name', `fake-input-${i}`)
+            fakeInput.setAttribute('class', `fake-inputs`)
+            fakeInput.setAttribute('value', `fake-content-${i}`)
+
+            const likeButton = document.createElement('button')
+            fakeForm.appendChild(likeButton)
+            likeButton.setAttribute('type', 'submit')
+            likeButton.setAttribute('id', `like-button-${i}`)
+            likeButton.textContent = 'Like'
+
+             document.getElementById(`like-button-${i}`).addEventListener('click', 
+                function addLike() {
+                  const createLikeEmoji = document.createElement('img')
+                  fakeForm.appendChild(createLikeEmoji)
+                  createLikeEmoji.setAttribute('src', '/client/assets/emojis/like.svg')
+                  createLikeEmoji.setAttribute('class', 'svg-like')
+                  
+                const prePayload = new FormData(fakeForm);
+                const payload = new URLSearchParams(prePayload);
+
+                  fetch(url, {
+                  method: "post",
+                  body: payload,
+                  })
+                  .then((res) => res.json())
+                  .then((data) => console.log('how does the data look like after fetching: ', data))
+                  .catch((err) => console.log('Error while post fetching: ', err));
+                  window.location.reload()
+
+                }
+            )
+
+
+            const likeCounter = document.createElement('div')
+            blogPostContainer.appendChild(likeCounter)
+            likeCounter.setAttribute('class', 'like-counter')
+            likeCounter.textContent = data[i]['like']['number']
+
+
+
+            
+            // const xhr = new XMLHttpRequest();
+            // xhr.open("POST", url, false);
+            // xhr.responseType = 'text'
+            // document.getElementById(`svg-like-${i}-blogpost`).addEventListener('click',
+            //   async function addLike() {
+            //     console.log(`like-counter-${i}-blogpost button clicked`);
+            //     // xhr.onload = // something
+
+            //     await xhr.send('like-button-clicked')
+            //   }
+            // )
+
+                // const prePayload = new FormData(replyForm);
+                // const payload = new URLSearchParams(prePayload);
+              
+               
+    }
+    
+
    document.getElementById(`btn-${i}`).addEventListener('click',
    function submitReply() {
    
@@ -158,8 +226,8 @@ function loadInitialPage (data) {
 
 
 
-const url = "https://community-journaling.herokuapp.com";
-// const url = "http://localhost:3000";
+// const url = "https://community-journaling.herokuapp.com";
+const url = "http://localhost:3000";
 
 function getData() {
 
