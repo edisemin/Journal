@@ -4,16 +4,15 @@ const input = document.querySelector(".input");
 const main = document.querySelector('#blog-posts')
 const newPostButton = document.getElementById('btn-two')
 
-// const url = "https://community-journaling.herokuapp.com";
-const url = "http://localhost:3000";
+// const url = "https://community-journaling.herokuapp.com";   // uncomment to use the backend server to fetch data
+const url = "http://localhost:3000";                // uncomment to use the localhost to fetch data
 
 
 
 document.addEventListener('submit', (e)=> e.preventDefault())
+
+/******************************************This makes the "New Post" button clickable and send the entered text to backend to store the data  */
 newPostButton.addEventListener('click', writeNewPost)
-
-
-
 function writeNewPost() {
    
    const prePayload = new FormData(form);
@@ -23,7 +22,7 @@ function writeNewPost() {
 
    fetch(url, {
     method: "post",
-    body: payload,        // ['userpost', 'the new post here']
+    body: payload,        
     })
     .then((res) => res.json())
     .then((data) => console.log('newBlogPost entry data here: ', data))
@@ -31,16 +30,20 @@ function writeNewPost() {
     window.location.reload()
 }
 
-/********************************************************************** This is for trying methods (not working now) */
+/********************************************************************** Here the webpage is getting loaded */
 function loadInitialPage (data) {
   const blogLength = Object.keys(data).length
-  for (let i = blogLength; i > 0; i--) {
 
-    const blogPostContainer = document.createElement('p')
-    blogPostContainer.setAttribute('class', 'content');
-    blogPostContainer.textContent = data[i]['body']
-    main.appendChild(blogPostContainer)
+/************** Loop through the database JSON file in the backend. All elements will be created as many times as many posts are saved in the database */
+  for (let i = 1; i <= blogLength; i++) {       // 
 
+    /**************************************************************This creates the main blog post container */
+      const blogPostContainer = document.createElement('p')
+      blogPostContainer.setAttribute('class', 'content');
+      blogPostContainer.textContent = data[i]['body']
+      main.appendChild(blogPostContainer)
+    
+    /************************************************************This creates the container with replies and the reply input form */
     const replyBox = document.createElement('div')
     replyBox.setAttribute('class', 'reply-box')
 
@@ -50,24 +53,73 @@ function loadInitialPage (data) {
             replySubBox.textContent = data[i]['replies'][j]
             replyBox.appendChild(replySubBox)
           }
-    blogPostContainer.appendChild(replyBox)
 
-
-    const replyForm = document.createElement("form");
+    const replyForm = document.createElement("form"); // The form itself
     replyForm.setAttribute('id', `reply-form-${i}`)
     blogPostContainer.appendChild(replyForm)
 
-    const inputField = document.createElement('input');
+    const inputField = document.createElement('input'); // The input field
     inputField.setAttribute('type', 'text')
     inputField.setAttribute('name', `reply-${i}`)
     inputField.setAttribute('placeholder', 'write a COMMENT...')
     replyForm.appendChild(inputField)
-
-    const submitButton = document.createElement('button')
+    
+    const submitButton = document.createElement('button') // The submit button
     submitButton.setAttribute('type', 'submit')
     submitButton.setAttribute('id', `btn-${i}`)
     submitButton.textContent = 'Reply'
     replyForm.appendChild(submitButton)
+    
+    /************************************************************Append the reply container to the main blogpost text */
+    blogPostContainer.appendChild(replyBox)
+
+    /********************************************************* This creates the GIF container with the gifs and the form with input field*/
+    const gifBox = document.createElement('div')
+    gifBox.setAttribute('id', 'gif-box')
+
+        const gifsAmount = data[i]['gifs'].length
+        for (let j = 0; j < gifsAmount; j++) {
+            const gifBody =  document.createElement('img')      // Load the gifs
+            gifBody.setAttribute('src', data[i]['gifs'][j])
+            gifBody.setAttribute('id', `gif-${i}-${j}`)
+            gifBox.appendChild(gifBody)
+          }
+          
+    const gifForm = document.createElement("form");  // Create the  gif form
+    gifForm.setAttribute('id', `gif-form-${i}`)
+    gifBox.appendChild(gifForm)
+    
+    const gifInputField = document.createElement('input');    // Create the gif input field
+    gifInputField.setAttribute('type', 'text')
+    gifInputField.setAttribute('name', `gif-input-${i}`)
+    gifInputField.setAttribute('placeholder', 'find a GIF...')
+    gifForm.appendChild(gifInputField)
+    
+    const gifSubmitButton = document.createElement('button')  // Create the submit button
+    gifSubmitButton.setAttribute('type', 'submit')
+    gifSubmitButton.setAttribute('id', `gif-btn-${i}`)
+    gifSubmitButton.textContent = 'Find a GIF'
+    gifForm.appendChild(gifSubmitButton)
+    
+    /************************************************************Append the GIF container to the main blogpost text */
+    blogPostContainer.appendChild(gifBox)
+
+    /****************************************************Make the "Find a GIF" button clickable fetch data (the url) for the GIF */
+    document.getElementById(`gif-btn-${i}`).addEventListener('click', function addGif() {
+        /**
+         *  THE LOGIC TO FIND THE APPORPRIATE GIF
+         * AND SEND THE URL TO THE BACKEND
+         * COMES TO THIS FUNCTION
+         * 
+         * 
+         * 
+         * 
+         * 
+         */
+      }
+    )
+
+    /************************************************************This creates the like button */
 
     const likeButton = document.createElement('button')
     replyForm.appendChild(likeButton)
@@ -75,18 +127,22 @@ function loadInitialPage (data) {
     likeButton.setAttribute('id', `like-button-${i}`)
     likeButton.textContent = 'Like'
 
+    /************************************************************This creates the like emoji */
+
     const createLikeEmoji = document.createElement('img')
     createLikeEmoji.setAttribute('src', '/client/assets/emojis/like.svg')
     createLikeEmoji.setAttribute('class', 'svg-like')
 
+    /************************************************************This creates the like counter */
         const likeCounter = document.createElement('div')
         blogPostContainer.appendChild(likeCounter)
         likeCounter.setAttribute('class', 'like-counter')
         likeCounter.textContent = data[i]['like']['number']
 
-      if (!data[i]['like']['is-there']) {
+      if (!data[i]['like']['is-there']) {                 // This conditional comes true if there is no "like" at this the blogpost for now
       console.log('There is no "like" emoji')
               
+    /*************************This makes the like button clickable and let the backend know if this button is clicked */
       document.getElementById(`like-button-${i}`).addEventListener('click', 
                 function addLike() {
                 console.log('im within addLike function')
@@ -95,11 +151,10 @@ function loadInitialPage (data) {
           const http = new XMLHttpRequest();
           
           const params = `like-button-${i}=clicked`;
-          console.log('params:', params) //*****
+          console.log('params:', params)
           http.open('POST', url, true);
-          console.log('after the http open') //*****
+          console.log('after the http open')
 
-          //Send the proper header information along with the request
           http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
           http.onreadystatechange = function() {//Call a function when the state changes.
               if(http.readyState == 4 && http.status == 200) {
@@ -110,8 +165,8 @@ function loadInitialPage (data) {
           window.location.reload()
           }
       )
-               
-    } else {
+    
+    } else { // This branch is executed when there is at least one "like" at this the blogpost
 
         document.getElementById(`like-button-${i}`).addEventListener('click', 
           function incrementLike() {
@@ -123,9 +178,9 @@ function loadInitialPage (data) {
               const params = `like-button-${i}=clicked`;
               console.log('params:', params) //*****
               http.open('POST', url, true);
-              console.log('after the http open') //*****
+              console.log('after the http open') 
 
-              //Send the proper header information along with the request
+              
               http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
               http.onreadystatechange = function() {//Call a function when the state changes.
                   if(http.readyState == 4 && http.status == 200) {
@@ -140,6 +195,7 @@ function loadInitialPage (data) {
           likeCounter.textContent = data[i]['like']['number']
     }
     
+    /*************************************************************From here the same procedures for the "funny" and the "angry emojis and their containers" */
         const funnyButton = document.createElement('button')
         replyForm.appendChild(funnyButton)
         funnyButton.setAttribute('type', 'submit')
@@ -168,7 +224,7 @@ function loadInitialPage (data) {
                   const http = new XMLHttpRequest();
                   
                   const params = `funny-button-${i}=clicked`;
-                  console.log('params:', params) //*****
+                  console.log('params:', params) 
                   http.open('POST', url, true);
                   console.log('after the http open') //*****
 
@@ -212,11 +268,10 @@ function loadInitialPage (data) {
                   replyForm.appendChild(createFunnyEmoji)
                   funnyCounter.textContent = data[i]['funny']['number']
             }
-        console.log('Im the imported funny checker')
         }   
 
         funnyChecker()
-
+        /*****************************************************Here starts with the "angry" button and emoji */
         const angryButton = document.createElement('button')
         replyForm.appendChild(angryButton)
         angryButton.setAttribute('type', 'submit')
@@ -291,7 +346,7 @@ function loadInitialPage (data) {
         }
 
         angryChecker()
-
+    /******************************************This makes the "Reply" button clickable and send the reply text to backend to store the data  */
    document.getElementById(`btn-${i}`).addEventListener('click',
    function submitReply() {
    
@@ -312,8 +367,7 @@ function loadInitialPage (data) {
 }
 
 
-/********************************************************************************************* End of trying block*/
-
+/************ This fetches the data from the backend json file and pass it to the loadInitalData function to make appear all existing elements*/
 
 function getData() {
 
