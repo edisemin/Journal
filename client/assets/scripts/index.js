@@ -118,6 +118,7 @@ function loadInitialPage (data) {
 
 
     const replyForm = document.createElement("form");
+    replyForm.setAttribute('id', `reply-form-${i}`)
     blogPostContainer.appendChild(replyForm)
 
     const inputField = document.createElement('input');
@@ -179,13 +180,38 @@ function loadInitialPage (data) {
               }
           }
           http.send(params);
-
-                }
-            )
+          window.location.reload()
+          }
+      )
                
     } else {
-        likeCounter.textContent = data[i]['like']['number'] + 1
-      }
+
+        document.getElementById(`like-button-${i}`).addEventListener('click', 
+          function incrementLike() {
+              console.log('im within addLike function')
+              replyForm.appendChild(createLikeEmoji)
+                      
+              const http = new XMLHttpRequest();
+              
+              const params = `like-button-${i}=clicked`;
+              console.log('params:', params) //*****
+              http.open('POST', url, true);
+              console.log('after the http open') //*****
+
+              //Send the proper header information along with the request
+              http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+              http.onreadystatechange = function() {//Call a function when the state changes.
+                  if(http.readyState == 4 && http.status == 200) {
+                      alert(http.responseText);
+                  }
+              }
+              http.send(params);
+              window.location.reload()
+          }
+      )
+          replyForm.appendChild(createLikeEmoji)
+          likeCounter.textContent = data[i]['like']['number']
+    }
     
 
    document.getElementById(`btn-${i}`).addEventListener('click',
@@ -214,8 +240,8 @@ function loadInitialPage (data) {
 
 
 
-// const url = "https://community-journaling.herokuapp.com";
-const url = "http://localhost:3000";
+const url = "https://community-journaling.herokuapp.com";
+// const url = "http://localhost:3000";
 
 function getData() {
 
