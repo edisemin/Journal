@@ -133,15 +133,6 @@ function loadInitialPage (data) {
     submitButton.textContent = 'Reply'
     replyForm.appendChild(submitButton)
 
-    // const fakeForm = document.createElement('form')
-    // blogPostContainer.appendChild(fakeForm)
-    
-    // const fakeInput = document.createElement('input')
-    // fakeForm.appendChild(fakeInput)
-    // fakeInput.setAttribute('name', `fake-like-input-${i}`)
-    // fakeInput.setAttribute('class', `fake-inputs`)
-    // fakeInput.setAttribute('value', `fake-content-${i}`)
-
     const likeButton = document.createElement('button')
     replyForm.appendChild(likeButton)
     likeButton.setAttribute('type', 'submit')
@@ -213,6 +204,82 @@ function loadInitialPage (data) {
           likeCounter.textContent = data[i]['like']['number']
     }
     
+        const funnyButton = document.createElement('button')
+        replyForm.appendChild(funnyButton)
+        funnyButton.setAttribute('type', 'submit')
+        funnyButton.setAttribute('id', `funny-button-${i}`)
+        funnyButton.textContent = 'Funny'
+
+        const createFunnyEmoji = document.createElement('img')
+        createFunnyEmoji.setAttribute('src', '/client/assets/emojis/funny.svg')
+        createFunnyEmoji.setAttribute('class', 'svg-funny')
+
+        const funnyCounter = document.createElement('div')
+        blogPostContainer.appendChild(funnyCounter)
+        funnyCounter.setAttribute('class', 'funny-counter')
+        funnyCounter.textContent = data[i]['funny']['number']
+
+        function funnyChecker() {
+
+        if (!data[i]['funny']['is-there']) {
+              console.log('There is no "funny" emoji')
+                      
+              document.getElementById(`funny-button-${i}`).addEventListener('click', 
+                        function addFunny() {
+                        console.log('im within addFunny function')
+                        replyForm.appendChild(createFunnyEmoji)
+                          
+                  const http = new XMLHttpRequest();
+                  
+                  const params = `funny-button-${i}=clicked`;
+                  console.log('params:', params) //*****
+                  http.open('POST', url, true);
+                  console.log('after the http open') //*****
+
+                  //Send the proper header information along with the request
+                  http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                  http.onreadystatechange = function() {//Call a function when the state changes.
+                      if(http.readyState == 4 && http.status == 200) {
+                          alert(http.responseText);
+                      }
+                  }
+                  http.send(params);
+                  window.location.reload()
+                  }
+              )
+                      
+            } else {
+
+                document.getElementById(`funny-button-${i}`).addEventListener('click', 
+                  function incrementLike() {
+                      console.log('im within addFunny function')
+                      replyForm.appendChild(createFunnyEmoji)
+                              
+                      const http = new XMLHttpRequest();
+                      
+                      const params = `funny-button-${i}=clicked`;
+                      console.log('params:', params) //*****
+                      http.open('POST', url, true);
+                      console.log('after the http open') //*****
+
+                      //Send the proper header information along with the request
+                      http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                      http.onreadystatechange = function() {//Call a function when the state changes.
+                          if(http.readyState == 4 && http.status == 200) {
+                              alert(http.responseText);
+                          }
+                      }
+                      http.send(params);
+                      window.location.reload()
+                  }
+              )
+                  replyForm.appendChild(createFunnyEmoji)
+                  likeCounter.textContent = data[i]['funny']['number']
+            }
+        console.log('Im the imported funny checker')
+        }   
+
+        funnyChecker()
 
    document.getElementById(`btn-${i}`).addEventListener('click',
    function submitReply() {
@@ -240,8 +307,8 @@ function loadInitialPage (data) {
 
 
 
-const url = "https://community-journaling.herokuapp.com";
-// const url = "http://localhost:3000";
+// const url = "https://community-journaling.herokuapp.com";
+const url = "http://localhost:3000";
 
 function getData() {
 
