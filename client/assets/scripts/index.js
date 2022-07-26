@@ -10,7 +10,7 @@ document.addEventListener('submit', (e)=> e.preventDefault())
 
 ///// this will post data to the server////////////////////////
 
-// function PostData(form) {
+// function postNewPost(form) {
 //    const prePayload = new FormData(form);
 //    const payload = new URLSearchParams(prePayload);
 
@@ -18,7 +18,7 @@ document.addEventListener('submit', (e)=> e.preventDefault())
 
 //    fetch('http://localhost:3000/', {
 //     method: "post",
-//     body: payload,
+//     body: payload, ['key', 'blogpost']
 //   })
 //     .then((res) => res.json())
 //     .then((data) => console.log(data))
@@ -70,13 +70,25 @@ document.addEventListener('submit', (e)=> e.preventDefault())
 
 
 
-// const url = "https://community-journaling.herokuapp.com";
-const url = "http://localhost:3000";
+
 
 
 /// planning on using this function to make a get request 
 
-function postComment() {
+function writeNewPost() {
+   
+   const prePayload = new FormData(form);
+   const payload = new URLSearchParams(prePayload);
+
+   //console.log([...payload]);
+
+   fetch('http://localhost:3000/', {
+    method: "post",
+    body: payload,
+    })
+    .then((res) => res.json())
+    .then((data) => console.log(data))
+    .catch((err) => console.log(err));
 
 }
 
@@ -123,7 +135,7 @@ function loadInitialPage (data) {
      const prePayload = new FormData(replyForm);
      const payload = new URLSearchParams(prePayload);
    
-     fetch('http://localhost:3000/', {
+     fetch('https://community-journaling.herokuapp.com/', {
       method: "post",
       body: payload,
      })
@@ -143,7 +155,8 @@ function loadInitialPage (data) {
 
 
 
-
+const url = "https://community-journaling.herokuapp.com";
+// const url = "http://localhost:3000";
 
 function getData() {
 
