@@ -130,6 +130,7 @@ function loadInitialPage (data) {
       .then((res) => res.json())
       .then((data) => console.log('how does the data look like after fetching: ', data))
       .catch((err) => console.log('Error while post fetching: ', err));
+      window.location.reload()
    })
   
 }
