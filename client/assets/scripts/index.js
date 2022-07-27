@@ -35,7 +35,7 @@ function loadInitialPage (data) {
   const blogLength = Object.keys(data).length
 
 /************** Loop through the database JSON file in the backend. All elements will be created as many times as many posts are saved in the database */
-  for (let i = 1; i <= blogLength; i++) {       // 
+  for (let i = blogLength; i > 0; i--) {       // 
 
     /**************************************************************This creates the main blog post container */
       const blogPostContainer = document.createElement('p')
