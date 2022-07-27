@@ -51,9 +51,11 @@ function writeNewPost() {
            headers: {
                'Content-Type': 'application/json'
            },
-           body: JSON.stringify(gifs.data[0])
-            }).catch(err => console.log('error while fetching / sending gif'))
-            console.log('dataToSend: ', dataToSend)
+           body: JSON.stringify(gifs.data[Math.floor(Math.random() * Object.entries(gifs.data).length)])
+            }).catch(err => {
+                console.log('error while fetching / sending gif: ', err);
+                window.location.reload()
+            })
         }
    )
 
