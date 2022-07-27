@@ -56,17 +56,20 @@ function loadInitialPage (data) {
 
     const replyForm = document.createElement("form"); // The form itself
     replyForm.setAttribute('id', `reply-form-${i}`)
+    replyForm.setAttribute('class', `reply-form`)
     blogPostContainer.appendChild(replyForm)
 
     const inputField = document.createElement('input'); // The input field
     inputField.setAttribute('type', 'text')
     inputField.setAttribute('name', `reply-${i}`)
+    inputField.setAttribute('class', `reply-field`)
     inputField.setAttribute('placeholder', 'write a COMMENT...')
     replyForm.appendChild(inputField)
     
     const submitButton = document.createElement('button') // The submit button
     submitButton.setAttribute('type', 'submit')
     submitButton.setAttribute('id', `btn-${i}`)
+    submitButton.setAttribute('class', `reply-btn`)
     submitButton.textContent = 'Reply'
     replyForm.appendChild(submitButton)
     
@@ -75,7 +78,7 @@ function loadInitialPage (data) {
 
     /********************************************************* This creates the GIF container with the gifs and the form with input field*/
     const gifBox = document.createElement('div')
-    gifBox.setAttribute('id', 'gif-box')
+    gifBox.setAttribute('id', `gif-box-${i}`)
 
         const gifsAmount = data[i]['gifs'].length
         for (let j = 0; j < gifsAmount; j++) {
@@ -92,6 +95,7 @@ function loadInitialPage (data) {
     const gifInputField = document.createElement('input');    // Create the gif input field
     gifInputField.setAttribute('type', 'text')
     gifInputField.setAttribute('name', `gif-input-${i}`)
+    gifInputField.setAttribute('id', `gif-input-${i}`)
     gifInputField.setAttribute('placeholder', 'find a GIF...')
     gifForm.appendChild(gifInputField)
     
@@ -105,17 +109,25 @@ function loadInitialPage (data) {
     blogPostContainer.appendChild(gifBox)
 
     /****************************************************Make the "Find a GIF" button clickable fetch data (the url) for the GIF */
-    document.getElementById(`gif-btn-${i}`).addEventListener('click', function addGif() {
+    document.getElementById(`gif-btn-${i}`).addEventListener('click', async function addGif() {
         /**
          *  THE LOGIC TO FIND THE APPORPRIATE GIF
          * AND SEND THE URL TO THE BACKEND
          * COMES TO THIS FUNCTION
-         * 
-         * 
-         * 
-         * 
-         * 
-         */
+        */
+       
+    const userInput = document.getElementById(`gif-input-${i}`).value
+    const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=zdlCdp0EGvd7yxHXu5B7ywlPueKFWe5w&q=${userInput}`)
+    // console.log(response)
+    const gifs = await response.json()
+    // console.log(gifs)
+    useApiData(gifs)
+
+    function useApiData(gifs) {
+        document.getElementById(`gif-box-${i}`).innerHTML =
+        `<img src = "${gifs.data[2].images.original.url}">`
+}
+
       }
     )
 
@@ -125,6 +137,7 @@ function loadInitialPage (data) {
     replyForm.appendChild(likeButton)
     likeButton.setAttribute('type', 'submit')
     likeButton.setAttribute('id', `like-button-${i}`)
+    likeButton.setAttribute('class', `like-button`)
     likeButton.textContent = 'Like'
 
     /************************************************************This creates the like emoji */
@@ -200,6 +213,7 @@ function loadInitialPage (data) {
         replyForm.appendChild(funnyButton)
         funnyButton.setAttribute('type', 'submit')
         funnyButton.setAttribute('id', `funny-button-${i}`)
+        funnyButton.setAttribute('class', `funny-button`)
         funnyButton.textContent = 'Funny'
 
         const createFunnyEmoji = document.createElement('img')
@@ -276,6 +290,7 @@ function loadInitialPage (data) {
         replyForm.appendChild(angryButton)
         angryButton.setAttribute('type', 'submit')
         angryButton.setAttribute('id', `angry-button-${i}`)
+        angryButton.setAttribute('class', `angry-button`)
         angryButton.textContent = 'Angry'
 
         const createAngryEmoji = document.createElement('img')
