@@ -65,11 +65,11 @@ function loadInitialPage (data) {
 
     /**************************************************************This creates the main blog post container */
     if (/giphy.com/.test(data[i]['body'])) {
-      const blogPostContainer = document.createElement('img')
+      var blogPostContainer = document.createElement('img')
       blogPostContainer.setAttribute('src', data[i]['body']);
         
     } else {
-        const blogPostContainer = document.createElement('p')
+        var blogPostContainer = document.createElement('p')
         blogPostContainer.setAttribute('class', 'content');
         blogPostContainer.textContent = data[i]['body']
         main.appendChild(blogPostContainer)
@@ -421,10 +421,11 @@ function getData() {
   fetch(url)
     .then(res => res.json())
     .then(data => {
-      // console.log(data);
       loadInitialPage(data)
     })
     .catch(err => {
+      console.log("Sorry! Your request could not be granted!", err)
+
       alert("Sorry! Your request could not be granted!", err)
     })
 }
