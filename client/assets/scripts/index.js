@@ -3,6 +3,7 @@ const form = document.querySelector(".form_main");
 const input = document.querySelector(".input");
 const main = document.querySelector('#blog-posts')
 const newPostButton = document.getElementById('btn-two')
+const newGIFPostButton = document.getElementById('gif-submit')
 
 // const url = "https://community-journaling.herokuapp.com";   // uncomment to use the backend server to fetch data
 const url = "http://localhost:3000";                // uncomment to use the localhost to fetch data
@@ -29,6 +30,32 @@ function writeNewPost() {
     .catch((err) => console.log(err));
     window.location.reload()
 }
+
+/******************************************This makes the "Post a GIF" button clickable and send the entered text to backend to store the data  */
+
+    async function getGif () {
+        const userInput = await document.getElementById(`gif-input-field`).value
+        const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=zdlCdp0EGvd7yxHXu5B7ywlPueKFWe5w&q=${userInput}`)
+        const gifs = await response.json()
+            return gifs.data[0]
+    }
+
+   newGIFPostButton.addEventListener('click', async () => {
+      
+    //   const payload = await getGif()
+     const response = await getGif()
+     const dataToSend = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(response)
+     })
+
+     console.log(dataToSend)
+    window.location.reload()
+    }    
+    )
 
 /********************************************************************** Here the webpage is getting loaded */
 function loadInitialPage (data) {
@@ -77,59 +104,59 @@ function loadInitialPage (data) {
     blogPostContainer.appendChild(replyBox)
 
     /********************************************************* This creates the GIF container with the gifs and the form with input field*/
-    const gifBox = document.createElement('div')
-    gifBox.setAttribute('id', `gif-box-${i}`)
+    // const gifBox = document.createElement('div')
+    // gifBox.setAttribute('id', `gif-box-${i}`)
 
-        const gifsAmount = data[i]['gifs'].length
-        for (let j = 0; j < gifsAmount; j++) {
-            const gifBody =  document.createElement('img')      // Load the gifs
-            gifBody.setAttribute('src', data[i]['gifs'][j])
-            gifBody.setAttribute('id', `gif-${i}-${j}`)
-            gifBox.appendChild(gifBody)
-          }
+    //     const gifsAmount = data[i]['gifs'].length
+    //     for (let j = 0; j < gifsAmount; j++) {
+    //         const gifBody =  document.createElement('img')      // Load the gifs
+    //         gifBody.setAttribute('src', data[i]['gifs'][j])
+    //         gifBody.setAttribute('id', `gif-${i}-${j}`)
+    //         gifBox.appendChild(gifBody)
+    //       }
           
-    const gifForm = document.createElement("form");  // Create the  gif form
-    gifForm.setAttribute('id', `gif-form-${i}`)
-    gifBox.appendChild(gifForm)
+    // const gifForm = document.createElement("form");  // Create the  gif form
+    // gifForm.setAttribute('id', `gif-form-${i}`)
+    // gifBox.appendChild(gifForm)
     
-    const gifInputField = document.createElement('input');    // Create the gif input field
-    gifInputField.setAttribute('type', 'text')
-    gifInputField.setAttribute('name', `gif-input-${i}`)
-    gifInputField.setAttribute('id', `gif-input-${i}`)
-    gifInputField.setAttribute('placeholder', 'find a GIF...')
-    gifForm.appendChild(gifInputField)
+    // const gifInputField = document.createElement('input');    // Create the gif input field
+    // gifInputField.setAttribute('type', 'text')
+    // gifInputField.setAttribute('name', `gif-input-${i}`)
+    // gifInputField.setAttribute('id', `gif-input-${i}`)
+    // gifInputField.setAttribute('placeholder', 'find a GIF...')
+    // gifForm.appendChild(gifInputField)
     
-    const gifSubmitButton = document.createElement('button')  // Create the submit button
-    gifSubmitButton.setAttribute('type', 'submit')
-    gifSubmitButton.setAttribute('id', `gif-btn-${i}`)
-    gifSubmitButton.textContent = 'Find a GIF'
-    gifForm.appendChild(gifSubmitButton)
+    // const gifSubmitButton = document.createElement('button')  // Create the submit button
+    // gifSubmitButton.setAttribute('type', 'submit')
+    // gifSubmitButton.setAttribute('id', `gif-btn-${i}`)
+    // gifSubmitButton.textContent = 'Find a GIF'
+    // gifForm.appendChild(gifSubmitButton)
     
-    /************************************************************Append the GIF container to the main blogpost text */
-    blogPostContainer.appendChild(gifBox)
+    // /************************************************************Append the GIF container to the main blogpost text */
+    // blogPostContainer.appendChild(gifBox)
 
     /****************************************************Make the "Find a GIF" button clickable fetch data (the url) for the GIF */
-    document.getElementById(`gif-btn-${i}`).addEventListener('click', async function addGif() {
-        /**
-         *  THE LOGIC TO FIND THE APPORPRIATE GIF
-         * AND SEND THE URL TO THE BACKEND
-         * COMES TO THIS FUNCTION
-        */
+//     document.getElementById(`gif-btn-${i}`).addEventListener('click', async function addGif() {
+//         /**
+//          *  THE LOGIC TO FIND THE APPORPRIATE GIF
+//          * AND SEND THE URL TO THE BACKEND
+//          * COMES TO THIS FUNCTION
+//         */
        
-    const userInput = document.getElementById(`gif-input-${i}`).value
-    const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=zdlCdp0EGvd7yxHXu5B7ywlPueKFWe5w&q=${userInput}`)
-    // console.log(response)
-    const gifs = await response.json()
-    // console.log(gifs)
-    useApiData(gifs)
+//     const userInput = document.getElementById(`gif-input-${i}`).value
+//     const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=zdlCdp0EGvd7yxHXu5B7ywlPueKFWe5w&q=${userInput}`)
+//     // console.log(response)
+//     const gifs = await response.json()
+//     // console.log(gifs)
+//     useApiData(gifs)
 
-    function useApiData(gifs) {
-        document.getElementById(`gif-box-${i}`).innerHTML =
-        `<img src = "${gifs.data[2].images.original.url}">`
-}
+//     function useApiData(gifs) {
+//         document.getElementById(`gif-box-${i}`).innerHTML =
+//         `<img src = "${gifs.data[2].images.original.url}">`
+// }
 
-      }
-    )
+//       }
+//     )
 
     /************************************************************This creates the like button */
 
