@@ -4,8 +4,8 @@ const main = document.querySelector('#blog-posts')
 const newPostButton = document.getElementById('btn-two')
 const newGIFPostButton = document.getElementById('gif-submit')
 
-// const url = "https://community-journaling.herokuapp.com";   // uncomment to use the backend server to fetch data
-const url = "http://localhost:3000";                // uncomment to use the localhost to fetch data
+const url = "https://community-journaling.herokuapp.com";   // uncomment to use the backend server to fetch data
+// const url = "http://localhost:3000";                // uncomment to use the localhost to fetch data
 
 
 
