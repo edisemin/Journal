@@ -4,8 +4,8 @@ const main = document.querySelector('#blog-posts')
 const newPostButton = document.getElementById('btn-two')
 const newGIFPostButton = document.getElementById('gif-submit')
 
-// const url = "https://community-journaling.herokuapp.com";   // uncomment to use the backend server to fetch data
-const url = "http://localhost:3000";                // uncomment to use the localhost to fetch data
+const url = "https://community-journaling.herokuapp.com";   // uncomment to use the backend server to fetch data
+// const url = "http://localhost:3000";                // uncomment to use the localhost to fetch data
 
 
 
@@ -32,29 +32,29 @@ function writeNewPost() {
 
 /******************************************This makes the "Post a GIF" button clickable and send the entered text to backend to store the data  */
 
-//     async function getGif () {
-//         const userInput = await document.getElementById(`gif-input-field`).value
-//         const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=zdlCdp0EGvd7yxHXu5B7ywlPueKFWe5w&q=${userInput}`)
-//         const gifs = await response.json()
-//             return gifs.data[0]
-//     }
+    async function getGif () {
+        const userInput = await document.getElementById(`gif-input-field`).value
+        const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=zdlCdp0EGvd7yxHXu5B7ywlPueKFWe5w&q=${userInput}`)
+        const gifs = await response.json()
+            return gifs.data[0]
+    }
 
-//    newGIFPostButton.addEventListener('click', async () => {
+   newGIFPostButton.addEventListener('click', async () => {
       
-//     //   const payload = await getGif()
-//      const response = await getGif()
-//      const dataToSend = await fetch(url, {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(response)
-//      })
+    //   const payload = await getGif()
+     const response = await getGif()
+     const dataToSend = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(response)
+     })
 
-//      console.log(dataToSend)
-//     window.location.reload()
-//     }    
-//     )
+     console.log(dataToSend)
+    window.location.reload()
+    }    
+    )
 
 /********************************************************************** Here the webpage is getting loaded */
 function loadInitialPage (data) {
@@ -64,10 +64,16 @@ function loadInitialPage (data) {
   for (let i = blogLength; i > 0; i--) {       // 
 
     /**************************************************************This creates the main blog post container */
-      const blogPostContainer = document.createElement('p')
-      blogPostContainer.setAttribute('class', 'content');
-      blogPostContainer.textContent = data[i]['body']
-      main.appendChild(blogPostContainer)
+    if (/giphy.com/.test(data[i]['body'])) {
+      const blogPostContainer = document.createElement('img')
+      blogPostContainer.setAttribute('src', data[i]['body']);
+        
+    } else {
+        const blogPostContainer = document.createElement('p')
+        blogPostContainer.setAttribute('class', 'content');
+        blogPostContainer.textContent = data[i]['body']
+        main.appendChild(blogPostContainer)
+    }
     
     /************************************************************This creates the container with replies and the reply input form */
     const replyBox = document.createElement('div')
