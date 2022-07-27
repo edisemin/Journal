@@ -54,6 +54,7 @@ function writeNewPost() {
            body: JSON.stringify(gifs.data[Math.floor(Math.random() * Object.entries(gifs.data).length)])
             }).catch(err => {
                 console.log('error while fetching / sending gif: ', err);
+                document.getElementById('loading-box').textContent = ''
                 window.location.reload()
             })
         }
