@@ -60,6 +60,6 @@ The website can be viewed in this link:
 ### Website Design
 
 ## Home Page
-![My Remote Image](https://www.dropbox.com/s/9fi0g2twprwkyxu/Community%20Journaling%20Website.png?dl=0](https://www.dropbox.com/t/NMyibQFmLuR1qej1)
+![My Remote Image]([https://www.dropbox.com/s/9fi0g2twprwkyxu/Community%20Journaling%20Website.png?dl=0](https://www.dropbox.com/t/NMyibQFmLuR1qej1](https://previews.dropbox.com/p/thumb/ABnRQjZDViJ0TNE670MsEQXi-3zWgO2xECFKVSDbHzCee9RjfdG_j2X512wd0FO52p_q43ug7dvPEdeyRYK8WSvJCiODZkbzWNFwy-C-1xM8t8W_Ae5HhnmdCbXPevNrW0B7ktxdSpajCfTUQ-ioviuef6RdMPbzxNTCt4LICsD8MuX_Iw4q8aRdA9twQXIVys8yg4Uw6Re3GpLXX6xmmdUp5yt79OpcnwFD54X_lDa4_nS8dJtr0zYdyAHfdZtaEo0hW8qczBF6C1nHageidvoxsdO4qZrCVQhMKEc8pJ_U2ErPA4f5CVZsLGj966zw2RKZyjQC0GUsL7944_7q_vENwmMyaby7ZXftGEQN1gged6yKSi51PwC6q30u9ZioAbA/p.png))
 
 
