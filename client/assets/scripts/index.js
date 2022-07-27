@@ -41,7 +41,7 @@ function writeNewPost() {
 
 /************************This makes the "Post a GIF" button clickable and send the entered text to backend to store the data  */
    newGIFPostButton.addEventListener('click', async () => {
-      
+        document.getElementById('loading-box').textContent = 'Loading...'
         const userInput = await document.getElementById(`gif-input-field`).value
         const gifResponse = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=zdlCdp0EGvd7yxHXu5B7ywlPueKFWe5w&q=${userInput}`)
         const gifs = await gifResponse.json()
@@ -54,6 +54,7 @@ function writeNewPost() {
            body: JSON.stringify(gifs.data[Math.floor(Math.random() * Object.entries(gifs.data).length)])
             }).catch(err => {
                 console.log('error while fetching / sending gif: ', err);
+                document.getElementById('loading-box').textContent = ''
                 window.location.reload()
             })
         }
