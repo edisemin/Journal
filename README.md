@@ -61,5 +61,5 @@ The website can be viewed in this link:
 
 ## Home Page
 ![My Remote Image](https://www.dropbox.com/s/9fi0g2twprwkyxu/Community%20Journaling%20Website.png?dl=0)
-
+Community Journaling Website.png
 
