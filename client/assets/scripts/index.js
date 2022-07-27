@@ -32,29 +32,29 @@ function writeNewPost() {
 
 /******************************************This makes the "Post a GIF" button clickable and send the entered text to backend to store the data  */
 
-    async function getGif () {
-        const userInput = await document.getElementById(`gif-input-field`).value
-        const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=zdlCdp0EGvd7yxHXu5B7ywlPueKFWe5w&q=${userInput}`)
-        const gifs = await response.json()
-            return gifs.data[0]
-    }
+//     async function getGif () {
+//         const userInput = await document.getElementById(`gif-input-field`).value
+//         const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=zdlCdp0EGvd7yxHXu5B7ywlPueKFWe5w&q=${userInput}`)
+//         const gifs = await response.json()
+//             return gifs.data[0]
+//     }
 
-   newGIFPostButton.addEventListener('click', async () => {
+//    newGIFPostButton.addEventListener('click', async () => {
       
-    //   const payload = await getGif()
-     const response = await getGif()
-     const dataToSend = await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(response)
-     })
+//     //   const payload = await getGif()
+//      const response = await getGif()
+//      const dataToSend = await fetch(url, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(response)
+//      })
 
-     console.log(dataToSend)
-    window.location.reload()
-    }    
-    )
+//      console.log(dataToSend)
+//     window.location.reload()
+//     }    
+//     )
 
 /********************************************************************** Here the webpage is getting loaded */
 function loadInitialPage (data) {
