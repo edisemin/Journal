@@ -30,23 +30,18 @@ function writeNewPost() {
     window.location.reload()
 }
 
-/*********************************************************************************88***This fetches a GIF URL related to the input field content  */
-
-        // async function getGif () {
-        //     const userInput = await document.getElementById(`gif-input-field`).value
-        //     const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=zdlCdp0EGvd7yxHXu5B7ywlPueKFWe5w&q=${userInput}`)
-        //     const gifs = await response.json()
-        //     return gifs.data[0]
-        // }
-
 /************************This makes the "Post a GIF" button clickable and send the entered text to backend to store the data  */
-   newGIFPostButton.addEventListener('click', async () => {
-      
+   newGIFPostButton.addEventListener('click', async (e) => {
+
+        e.preventDefault()
+
+        document.getElementById('loading-box').textContent = 'Loading...'
+
         const userInput = await document.getElementById(`gif-input-field`).value
         const gifResponse = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=zdlCdp0EGvd7yxHXu5B7ywlPueKFWe5w&q=${userInput}`)
         const gifs = await gifResponse.json()
         // const bodyToSend = JSON.stringify(gifs.data[0]['embed_url'])
-        const dataToSend = await fetch(url, {
+        fetch(url, {
            method: 'POST',
            headers: {
                'Content-Type': 'application/json'
@@ -54,7 +49,7 @@ function writeNewPost() {
            body: JSON.stringify(gifs.data[Math.floor(Math.random() * Object.entries(gifs.data).length)])
             }).catch(err => {
                 console.log('error while fetching / sending gif: ', err);
-                document.getElementById('loading-box').textContent = ''
+                // document.getElementById('loading-box').textContent = ''
                 window.location.reload()
             })
         }
