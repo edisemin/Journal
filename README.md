@@ -60,6 +60,6 @@ The website can be viewed in this link:
 ### Website Design
 
 ## Home Page
-![My Remote Image]([https://www.dropbox.com/s/9fi0g2twprwkyxu/Community%20Journaling%20Website.png?dl=0](https://www.dropbox.com/t/NMyibQFmLuR1qej1)
+![My Remote Image](https://www.dropbox.com/s/9fi0g2twprwkyxu/Community%20Journaling%20Website.png?dl=0](https://www.dropbox.com/t/NMyibQFmLuR1qej1)
 
 
