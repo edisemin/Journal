@@ -67,6 +67,8 @@ function loadInitialPage (data) {
     if (/giphy.com/.test(data[i]['body'])) {
       var blogPostContainer = document.createElement('img')
       blogPostContainer.setAttribute('src', data[i]['body']);
+      blogPostContainer.setAttribute('class', 'content');
+      main.appendChild(blogPostContainer)
         
     } else {
         var blogPostContainer = document.createElement('p')
