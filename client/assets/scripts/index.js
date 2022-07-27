@@ -138,7 +138,7 @@ function loadInitialPage (data) {
         likeCounter.textContent = data[i]['like']['number']
 
       if (!data[i]['like']['is-there']) {                 // This conditional comes true if there is no "like" at this the blogpost for now
-      console.log('There is no "like" emoji')
+      
               
     /*************************This makes the like button clickable and let the backend know if this button is clicked */
       document.getElementById(`like-button-${i}`).addEventListener('click', 
@@ -213,7 +213,7 @@ function loadInitialPage (data) {
         function funnyChecker() {
 
         if (!data[i]['funny']['is-there']) {
-              console.log('There is no "funny" emoji')
+              
                       
               document.getElementById(`funny-button-${i}`).addEventListener('click', 
                         function addFunny() {
@@ -289,7 +289,6 @@ function loadInitialPage (data) {
 
         function angryChecker () {
           if (!data[i]['angry']['is-there']) {
-              console.log('There is no "angry" emoji')
                       
               document.getElementById(`angry-button-${i}`).addEventListener('click', 
                         function addAngry() {
