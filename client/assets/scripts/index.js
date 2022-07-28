@@ -109,7 +109,7 @@ function loadInitialPage (data) {
     inputField.setAttribute('type', 'text')
     inputField.setAttribute('name', `reply-${i}`)
     inputField.setAttribute('class', `reply-field`)
-    inputField.setAttribute('placeholder', 'write a COMMENT...')
+    inputField.setAttribute('placeholder', 'Write a comment...')
     inputField.setAttribute('maxlength', 200)   //******************Restrict charactor input  **** Jonny */
     replyForm.appendChild(inputField)
     
