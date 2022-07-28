@@ -7,6 +7,38 @@ const newGIFPostButton = document.getElementById('gif-btn')
 // const url = "https://community-journaling.herokuapp.com";   // uncomment to use the backend server to fetch data
 const url = "http://localhost:3000";                // uncomment to use the localhost to fetch data
 
+let scrollX;
+let scrollY;
+
+
+
+
+
+
+// this gets the current scroll position and logs to the console
+
+
+//
+
+// this fuction will scroll to 100px from the top on click of html div
+// function scrollFuntion(){
+    
+//     document.documentElement.scrollTop = document.body.scrollTop = 100;
+//     console.log()
+// }
+
+// apparently this is how local storage is used. when the page is refreshed you will still see the name smith
+sessionStorage.setItem("lastname", "Smith");
+  let personName = sessionStorage.getItem("lastname");
+  document.getElementById("demo").innerText = personName;
+
+
+
+
+
+
+
+
 
 
 document.addEventListener('submit', (e)=> e.preventDefault())
@@ -406,10 +438,16 @@ function loadInitialPage (data) {
       .then((res) => res.json())
       .then((data) => console.log('how does the data look like after fetching: ', data))
       .catch((err) => console.log('Error while post fetching: ', err));
+    //   window.scrollTo(scrollX, scrollY)
+    //   console.log('scroll after scrollto: ', scrollY)
       window.location.reload()
+    //   console.log('scroll after window reload: ', scrollY)
+
    })
   
 }
+window.scrollTo(scrollX, scrollY)
+
 }
 
 
@@ -432,8 +470,24 @@ function getData() {
 
 window.addEventListener('load', () => {
     getData()
+    // window.scrollTo(scrollX, scrollY)
 })
 
-module.exports = {
-    getData
-}
+// function windowScroll() 
+    window.addEventListener("scroll", (event) => {
+        scrollY = this.scrollY;
+        scrollX = this.scrollX;
+        console.log(scrollY);
+        console.log(scrollX);
+       
+        // displays scroll position on the page. This is just a test to see if I can do something with the scroll position
+        let demo = document.getElementById('demo')
+        demo.innerText = `scrollY: ${scrollY}, scrollX: ${scrollX}`
+    
+    });
+
+
+
+// module.exports = {
+//     getData
+// }
