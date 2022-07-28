@@ -1,7 +1,6 @@
-const frontendJS = require('../client/assets/scripts/index')
+const getData = require('../client/assets/scripts/index')
 
 describe('Frontend JavaScript test', () => {
-    let api;
 
     const mockJSON = {
   "1": {

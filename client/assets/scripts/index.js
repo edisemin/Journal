@@ -138,7 +138,7 @@ function loadInitialPage (data) {
     const createLikeEmoji = document.createElement('img')
     createLikeEmoji.setAttribute('src', '/client/assets/emojis/like.png')
     createLikeEmoji.setAttribute('class', 'svg-like')
- const likeImg = document.querySelector('.svg-like')
+    const likeImg = document.querySelector('.svg-like')
     /************************************************************This creates the like counter */
         const likeCounter = document.createElement('div')
 
@@ -421,6 +421,7 @@ function getData() {
     .then(res => res.json())
     .then(data => {
       loadInitialPage(data)
+      return data
     })
     .catch(err => {
       console.log("Sorry! Your request could not be granted!", err)
@@ -432,3 +433,7 @@ function getData() {
 window.addEventListener('load', () => {
     getData()
 })
+
+module.exports = {
+    getData
+}
