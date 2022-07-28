@@ -4,8 +4,8 @@ const main = document.querySelector('#blog-posts')
 const newPostButton = document.getElementById('btn-two')
 const newGIFPostButton = document.getElementById('gif-btn')
 
-// const url = "https://community-journaling.herokuapp.com";   // uncomment to use the backend server to fetch data
-const url = "http://localhost:3000";                // uncomment to use the localhost to fetch data
+const url = "https://community-journaling.herokuapp.com";   // uncomment to use the backend server to fetch data
+//const url = "http://localhost:3000";                // uncomment to use the localhost to fetch data
 
 let scrollX;
 let scrollY;
@@ -28,9 +28,7 @@ let scrollY;
 // }
 
 // apparently this is how local storage is used. when the page is refreshed you will still see the name smith
-sessionStorage.setItem("lastname", "Smith");
-  let personName = sessionStorage.getItem("lastname");
-  document.getElementById("demo").innerText = personName;
+
 
 
 
