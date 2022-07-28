@@ -23,25 +23,23 @@ footer {
 }
 
 .car1 {
-  width: 3.75rem;
-  height: 4.38rem;
+  height: 12vw;
   padding-right: 1rem;
 }
 
 .car2 {
-  width: 3.75rem;
-  height: 4.38rem;
+  width: 12vw;
   padding-right: 1rem;
   transform: rotateY(180deg);
 }
 
 .title {
   font-family: "Tangerine", cursive;
-  font-size: 3.5rem;
+  font-size: 6.5vw;
 }
 
 .col {
-  width: 700px;
+  width: 1000px;
 }
 
 .images {
@@ -57,7 +55,6 @@ footer {
 .about-blog {
   text-align: center;
   font-family: "Edu NSW ACT Foundation", cursive;
-  font-size: 2rem;
   font-size: 3.5vw;
   color: rgb(0, 0, 0);
   margin-top: 2rem;
@@ -65,8 +62,8 @@ footer {
 
 .forms-wrapper {
   display: flex;
-  justify-content: space-between;
-  width: 55%;
+  justify-content: space-evenly;
+  width: 100%;
   margin: auto;
   margin-top: 2rem;
   margin-bottom: 2rem;
@@ -82,16 +79,9 @@ footer {
 }
 
 .gif-class {
-  width: 100%;
+  width: 25vw;
 }
 
-@media screen and (max-width: 500px) {
-  .forms-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-}
 
 .form_main input,
 .form_gif input {
@@ -101,8 +91,18 @@ footer {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
+.reply-form {
+  padding-top: 0.5rem;
+}
+
+.reply-field {
+  border-color: rgb(20, 81, 248);
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+}
+
 #btn-two,
-#gif-btn {
+#gif-btn, .reply-btn {
   background-color: rgb(20, 81, 248);
   border: none;
   padding: 1rem;
@@ -151,17 +151,9 @@ footer {
   transform: rotate(360deg);
 }
 
-.reply-form {
-  margin-top: 1rem;
-}
-
-.reply-field {
-  padding: 1rem;
-}
-
 #btn,
 .reply-btn {
-  background-color: rgb(62, 62, 243);
+  background-color: rgb(20, 81, 248);
   border: none;
   padding: 0.8rem;
   color: white;
@@ -184,3 +176,20 @@ footer {
   margin-left: 0.7rem;
   cursor: pointer;
 }
+
+@media screen and (max-width: 600px) {
+  .forms-wrapper {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 780px) {
+
+  }
+
+@media screen and (max-width: 400px) {
+  .img-section {
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+} 
