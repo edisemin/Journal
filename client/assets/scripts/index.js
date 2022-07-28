@@ -4,8 +4,10 @@ const main = document.querySelector('#blog-posts')
 const newPostButton = document.getElementById('btn-two')
 const newGIFPostButton = document.getElementById('gif-btn')
 
+
+
 const url = "https://community-journaling.herokuapp.com";   // uncomment to use the backend server to fetch data
-// const url = "http://localhost:3000";                // uncomment to use the localhost to fetch data
+//const url = "http://localhost:3000";                // uncomment to use the localhost to fetch data
 
 
 
@@ -123,17 +125,23 @@ function loadInitialPage (data) {
     likeButton.setAttribute('type', 'submit')
     likeButton.setAttribute('id', `like-button-${i}`)
     likeButton.setAttribute('class', `like-button`)
-    likeButton.textContent = 'Like'
+    
 
     /************************************************************This creates the like emoji */
 
     const createLikeEmoji = document.createElement('img')
-    createLikeEmoji.setAttribute('src', '/client/assets/emojis/like.svg')
+    createLikeEmoji.setAttribute('src', '/client/assets/emojis/like.png')
     createLikeEmoji.setAttribute('class', 'svg-like')
-
+ const likeImg = document.querySelector('.svg-like')
     /************************************************************This creates the like counter */
         const likeCounter = document.createElement('div')
-        blogPostContainer.appendChild(likeCounter)
+
+        
+        likeButton.append(createLikeEmoji)   /*inserts like image inside button **** Jonny */
+       
+
+        likeButton.appendChild(likeCounter)    /*inserts counter inside button **** Jonny */
+
         likeCounter.setAttribute('class', 'like-counter')
         likeCounter.textContent = data[i]['like']['number']
 
@@ -144,7 +152,7 @@ function loadInitialPage (data) {
       document.getElementById(`like-button-${i}`).addEventListener('click', 
                 function addLike() {
                 console.log('im within addLike function')
-                replyForm.appendChild(createLikeEmoji)
+                createLikeEmoji.style = '  transform: rotate(-60deg)'        /* rotate emoji **** Jonny */
                   
           const http = new XMLHttpRequest();
           
@@ -169,7 +177,7 @@ function loadInitialPage (data) {
         document.getElementById(`like-button-${i}`).addEventListener('click', 
           function incrementLike() {
               console.log('im within addLike function')
-              replyForm.appendChild(createLikeEmoji)
+              createLikeEmoji.style = '  transform: rotate(-60deg)'   /* rotate emoji **** Jonny */
                       
               const http = new XMLHttpRequest();
               
@@ -189,7 +197,7 @@ function loadInitialPage (data) {
               window.location.reload()
           }
       )
-          replyForm.appendChild(createLikeEmoji)
+                           /*deleted this line. Its not needed because emoji is always on page **** Jonny */
           likeCounter.textContent = data[i]['like']['number']
     }
     
@@ -199,14 +207,20 @@ function loadInitialPage (data) {
         funnyButton.setAttribute('type', 'submit')
         funnyButton.setAttribute('id', `funny-button-${i}`)
         funnyButton.setAttribute('class', `funny-button`)
-        funnyButton.textContent = 'Funny'
+        
+
 
         const createFunnyEmoji = document.createElement('img')
-        createFunnyEmoji.setAttribute('src', '/client/assets/emojis/funny.svg')
+        createFunnyEmoji.setAttribute('src', '/client/assets/emojis/funny.png')
         createFunnyEmoji.setAttribute('class', 'svg-funny')
+        
+       
+
 
         const funnyCounter = document.createElement('div')
-        blogPostContainer.appendChild(funnyCounter)
+        
+        funnyButton.append(createFunnyEmoji)              /*inserts funny image inside button **** Jonny */
+        funnyButton.appendChild(funnyCounter)
         funnyCounter.setAttribute('class', 'funny-counter')
         funnyCounter.textContent = data[i]['funny']['number']
 
@@ -218,7 +232,7 @@ function loadInitialPage (data) {
               document.getElementById(`funny-button-${i}`).addEventListener('click', 
                         function addFunny() {
                         console.log('im within addFunny function')
-                        replyForm.appendChild(createFunnyEmoji)
+                        createFunnyEmoji.style = '  transform: rotate(-60deg)' /* rotate emoji **** Jonny */    
                           
                   const http = new XMLHttpRequest();
                   
@@ -244,7 +258,7 @@ function loadInitialPage (data) {
                 document.getElementById(`funny-button-${i}`).addEventListener('click', 
                   function incrementFunny() {
                       console.log('im within incrementFunny function')
-                      replyForm.appendChild(createFunnyEmoji)
+                      createFunnyEmoji.style = '  transform: rotate(-60deg)' /* rotate emoji **** Jonny */
                               
                       const http = new XMLHttpRequest();
                       
@@ -264,7 +278,7 @@ function loadInitialPage (data) {
                       window.location.reload()
                   }
               )
-                  replyForm.appendChild(createFunnyEmoji)
+                   /*deleted this line its not needed because emoji is always on page **** Jonny */
                   funnyCounter.textContent = data[i]['funny']['number']
             }
         }   
@@ -276,14 +290,24 @@ function loadInitialPage (data) {
         angryButton.setAttribute('type', 'submit')
         angryButton.setAttribute('id', `angry-button-${i}`)
         angryButton.setAttribute('class', `angry-button`)
-        angryButton.textContent = 'Angry'
+        
+        
+        
 
+
+        
         const createAngryEmoji = document.createElement('img')
-        createAngryEmoji.setAttribute('src', '/client/assets/emojis/angry.svg')
+        createAngryEmoji.setAttribute('src', '/client/assets/emojis/angry.png')
         createAngryEmoji.setAttribute('class', 'svg-angry')
 
+        
+  
+        
+
+        angryButton.append(createAngryEmoji)/*inserts angry image inside button **** Jonny */
         const angryCounter = document.createElement('div')
-        blogPostContainer.appendChild(angryCounter)
+        angryButton.appendChild(angryCounter) /* inserts angry counter inside angry button **** Jonny */
+
         angryCounter.setAttribute('class', 'angry-counter')
         angryCounter.textContent = data[i]['angry']['number']
 
@@ -294,7 +318,7 @@ function loadInitialPage (data) {
               document.getElementById(`angry-button-${i}`).addEventListener('click', 
                         function addAngry() {
                         console.log('im within addAngry function')
-                        replyForm.appendChild(createAngryEmoji)
+                        createAngryEmoji.style = '  transform: rotate(-60deg)' /* rotate emoji **** Jonny */
                           
                   const http = new XMLHttpRequest();
                   
@@ -320,7 +344,7 @@ function loadInitialPage (data) {
                 document.getElementById(`angry-button-${i}`).addEventListener('click', 
                   function incrementAngry() {
                       console.log('im within incrementAngry function')
-                      replyForm.appendChild(createAngryEmoji)
+                      createAngryEmoji.style = '  transform: rotate(-60deg)' /* rotate emoji **** Jonny */
                               
                       const http = new XMLHttpRequest();
                       
@@ -340,7 +364,7 @@ function loadInitialPage (data) {
                       window.location.reload()
                   }
               )
-                  replyForm.appendChild(createAngryEmoji)
+                          /*deleted this line its not needed because emoji is always on page **** Jonny */
                   angryCounter.textContent = data[i]['angry']['number']
             }
         }
