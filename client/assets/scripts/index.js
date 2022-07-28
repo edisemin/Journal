@@ -4,21 +4,8 @@ const main = document.querySelector('#blog-posts')
 const newPostButton = document.getElementById('btn-two')
 const newGIFPostButton = document.getElementById('gif-btn')
 
-<<<<<<< HEAD
 // const url = "https://community-journaling.herokuapp.com";   // uncomment to use the backend server to fetch data
 const url = "http://localhost:3000";                // uncomment to use the localhost to fetch data
-=======
-        
-
-
-
-  
-
-
-
-const url = "https://community-journaling.herokuapp.com";   // uncomment to use the backend server to fetch data
-//const url = "http://localhost:3000";                // uncomment to use the localhost to fetch data
->>>>>>> jonny
 
 
 
@@ -119,12 +106,8 @@ function loadInitialPage (data) {
     inputField.setAttribute('type', 'text')
     inputField.setAttribute('name', `reply-${i}`)
     inputField.setAttribute('class', `reply-field`)
-<<<<<<< HEAD
-    inputField.setAttribute('placeholder', 'write a comment...')
-=======
     inputField.setAttribute('placeholder', 'write a COMMENT...')
     inputField.setAttribute('maxlength', 200)   //******************Restrict charactor input  **** Jonny */
->>>>>>> jonny
     replyForm.appendChild(inputField)
     
     const submitButton = document.createElement('button') // The submit button
@@ -446,14 +429,6 @@ function getData() {
     })
 }
 
-<<<<<<< HEAD
 window.addEventListener('load', () => {
     getData()
 })
-=======
-
-getData()
-
-
-
->>>>>>> jonny
