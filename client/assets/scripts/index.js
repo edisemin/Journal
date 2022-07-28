@@ -7,9 +7,6 @@ const newGIFPostButton = document.getElementById('gif-btn')
 // const url = "https://community-journaling.herokuapp.com";   // uncomment to use the backend server to fetch data
 const url = "http://localhost:3000";                // uncomment to use the localhost to fetch data
 
-let scrollX;
-let scrollY;
-
 
 document.addEventListener('submit', (e)=> e.preventDefault())
 
@@ -454,3 +451,4 @@ console.log('Bottom of the page')
 // module.exports = {
 //     getData
 // }
+// 
