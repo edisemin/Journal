@@ -35,7 +35,7 @@ function writeNewPost() {
 
         e.preventDefault()
 
-        document.getElementById('loading-box').textContent = 'Loading...'
+        document.getElementById('loading-box').textContent = 'Loading... please wait'
 
         try {
             const userInput = await document.getElementById(`gif-input-field`).value
