@@ -311,6 +311,8 @@ function loadInitialPage (data) {
         angryCounter.setAttribute('class', 'angry-counter')
         angryCounter.textContent = data[i]['angry']['number']
 
+      if (angryCounter)
+
         function angryChecker () {
           if (!data[i]['angry']['is-there']) {
               console.log('There is no "angry" emoji')
