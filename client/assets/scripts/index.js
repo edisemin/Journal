@@ -7,6 +7,11 @@ const newGIFPostButton = document.getElementById('gif-btn')
         
 
 
+
+  
+
+
+
 const url = "https://community-journaling.herokuapp.com";   // uncomment to use the backend server to fetch data
 //const url = "http://localhost:3000";                // uncomment to use the localhost to fetch data
 
@@ -88,7 +93,8 @@ function loadInitialPage (data) {
     /************************************************************This creates the container with replies and the reply input form */
     const replyBox = document.createElement('div')
     replyBox.setAttribute('class', 'reply-box')
-
+    
+    
         const repliesAmount = data[i]['replies'].length
         for (let j = 0; j < repliesAmount; j++) {
             const replySubBox =  document.createElement('div')
@@ -106,6 +112,7 @@ function loadInitialPage (data) {
     inputField.setAttribute('name', `reply-${i}`)
     inputField.setAttribute('class', `reply-field`)
     inputField.setAttribute('placeholder', 'write a COMMENT...')
+    inputField.setAttribute('maxlength', 200)   //******************Restrict charactor input  **** Jonny */
     replyForm.appendChild(inputField)
     
     const submitButton = document.createElement('button') // The submit button
@@ -115,6 +122,9 @@ function loadInitialPage (data) {
     submitButton.textContent = 'Reply'
     replyForm.appendChild(submitButton)
     
+
+    
+
     /************************************************************Append the reply container to the main blogpost text */
     blogPostContainer.appendChild(replyBox)
 
@@ -427,3 +437,6 @@ function getData() {
 
 
 getData()
+
+
+
