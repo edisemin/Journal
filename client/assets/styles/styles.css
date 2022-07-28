@@ -207,11 +207,14 @@ width:5rem
 
 @media screen and (max-width: 730px) {
   .forms-wrapper {
-    
-    width:70%;
+    justify-content: center;
+    width:80%;
     margin:auto;
     margin-top:2rem
   }
+
+  .input-gif{margin-top:1rem}
+ 
 }
 
 @media screen and (max-width: 630px) {
@@ -224,10 +227,47 @@ width:5rem
   .car1, .car2 {
     display:none
     }
-    
-    header{justify-content: center;}
+
+    .title {
+     
+      font-size: 3rem;
+      }
+
+ header{justify-content: center;}
+ footer{justify-content: center;}
 
 }
+
+
+@media screen and (max-width: 580px) {
+  
+  .svg-like,
+  .svg-funny,
+  .svg-angry {
+    margin-top:1rem
+  }
+  
+
+.about-blog {
+ 
+  font-size: 1.7rem;
+ 
+}
+
+}
+
+@media screen and (max-width: 450px) {
+  .img-section {
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+  #buggati, #lambo {
+    display: none;
+  }
+  .reply-field {
+    width: 80%;
+  }
+} 
 
 
 @media screen and (max-width: 370px) {
@@ -240,16 +280,5 @@ width:5rem
   }
   }
 
-@media screen and (max-width: 400px) {
-  .img-section {
-    flex-wrap: wrap;
-    flex-direction: row;
-  }
-  #buggati, #lambo {
-    display: none;
-  }
-  .reply-field {
-    width: 80%;
-  }
-} 
+
 
