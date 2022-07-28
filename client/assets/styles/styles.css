@@ -72,8 +72,16 @@ footer {
   margin-bottom: 2rem;
 }
 
-@media screen and (max-width: 400px) {
-  
+.gif-class {
+  width: 100%
+}
+
+@media screen and (max-width: 500px) {
+  .forms-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
 }
 
 .form_main input,
