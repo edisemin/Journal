@@ -66,8 +66,8 @@ function loadInitialPage (data) {
   const blogLength = Object.keys(data).length
 
 /************** Loop through the database JSON file in the backend. All elements will be created as many times as many posts are saved in the database */
-  for (let i = blogLength; i > 0; i--) {       // 
-
+  for (let i = blogLength; i >= 0; i--) {       // 
+    if (i === 0) {return}   // If there are no blogposts, don't start creating elements
     /**************************************************************This creates the main blog post container */
     const blogPostContainer = document.createElement('p')
     blogPostContainer.setAttribute('class', 'content');
@@ -425,7 +425,7 @@ function getData() {
     .catch(err => {
       console.log("Sorry! Your request could not be granted!", err)
 
-      alert("Sorry! Your request could not be granted!", err)
+      alert("Sorry! Your request could not be granted!")
     })
 }
 
