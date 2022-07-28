@@ -434,21 +434,17 @@ window.addEventListener('load', () => {
 })
 
 
-window.addEventListener("scroll", (event) => {
-    scrollY = this.scrollY;
-    scrollX = this.scrollX;
-    console.log(scrollY);
-    console.log(scrollX);
+
+/******************************************************TThis below needs to be fixed */
+
+// window.addEventListener("scroll", (event) => {
+//     scrollY = this.scrollY;
+//     scrollX = this.scrollX;
+//     console.log(scrollY);
+//     console.log(scrollX);
     
-    // displays scroll position on the page. This is just a test to see if I can do something with the scroll position
-    let demo = document.getElementById('demo')
-    demo.innerText = `scrollY: ${scrollY}, scrollX: ${scrollX}`
+//     // displays scroll position on the page. This is just a test to see if I can do something with the scroll position
+//     let demo = document.getElementById('demo')
+//     demo.innerText = `scrollY: ${scrollY}, scrollX: ${scrollX}`
 
-});
-
-console.log('Bottom of the page')
-
-// module.exports = {
-//     getData
-// }
-// 
+// });
