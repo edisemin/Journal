@@ -4,6 +4,7 @@ const main = document.querySelector('#blog-posts')
 const newPostButton = document.getElementById('btn-two')
 const newGIFPostButton = document.getElementById('gif-btn')
 
+        
 
 
 const url = "https://community-journaling.herokuapp.com";   // uncomment to use the backend server to fetch data
@@ -145,6 +146,13 @@ function loadInitialPage (data) {
         likeCounter.setAttribute('class', 'like-counter')
         likeCounter.textContent = data[i]['like']['number']
 
+
+        if(likeCounter.textContent == 0){          /** Hides counter if value is zero **** Jonny  */
+        likeCounter.style.display = 'none' 
+    }else { likeCounter.style.display = 'block'}
+
+
+
       if (!data[i]['like']['is-there']) {                 // This conditional comes true if there is no "like" at this the blogpost for now
       console.log('There is no "like" emoji')
               
@@ -223,6 +231,10 @@ function loadInitialPage (data) {
         funnyButton.appendChild(funnyCounter)
         funnyCounter.setAttribute('class', 'funny-counter')
         funnyCounter.textContent = data[i]['funny']['number']
+
+        if(funnyCounter.textContent == 0){          /** Hides counter if value is zero **** Jonny  */
+        funnyCounter.style.display = 'none' 
+    }else { funnyCounter.style.display = 'block'}
 
         function funnyChecker() {
 
@@ -309,9 +321,13 @@ function loadInitialPage (data) {
         angryButton.appendChild(angryCounter) /* inserts angry counter inside angry button **** Jonny */
 
         angryCounter.setAttribute('class', 'angry-counter')
+       
+    
         angryCounter.textContent = data[i]['angry']['number']
 
-     
+        if(angryCounter.textContent == 0){          /** Hides counter if value is zero **** Jonny*/
+            angryCounter.style.display = 'none' 
+        }else { angryCounter.style.display = 'block'}
 
         function angryChecker () {
           if (!data[i]['angry']['is-there']) {
