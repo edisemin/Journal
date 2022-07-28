@@ -4,62 +4,32 @@ const main = document.querySelector('#blog-posts')
 const newPostButton = document.getElementById('btn-two')
 const newGIFPostButton = document.getElementById('gif-btn')
 
-const url = "https://community-journaling.herokuapp.com";   // uncomment to use the backend server to fetch data
-// const url = "http://localhost:3000";                // uncomment to use the localhost to fetch data
+// const url = "https://community-journaling.herokuapp.com";   // uncomment to use the backend server to fetch data
+const url = "http://localhost:3000";                // uncomment to use the localhost to fetch data
 
 let scrollX;
 let scrollY;
-
-
-
-
-
-
-// this gets the current scroll position and logs to the console
-
-
-//
-
-// this fuction will scroll to 100px from the top on click of html div
-// function scrollFuntion(){
-    
-//     document.documentElement.scrollTop = document.body.scrollTop = 100;
-//     console.log()
-// }
-
-// apparently this is how local storage is used. when the page is refreshed you will still see the name smith
-sessionStorage.setItem("lastname", "Smith");
-  let personName = sessionStorage.getItem("lastname");
-  document.getElementById("demo").innerText = personName;
-
-
-
-
-
-
-
-
 
 
 document.addEventListener('submit', (e)=> e.preventDefault())
 
 /******************************************This makes the "New Post" button clickable and send the entered text to backend to store the data  */
 newPostButton.addEventListener('click', writeNewPost)
-function writeNewPost() {
-   
-   const prePayload = new FormData(form);
-   const payload = new URLSearchParams(prePayload);
+    function writeNewPost() {
+    
+    const prePayload = new FormData(form);
+    const payload = new URLSearchParams(prePayload);
 
-   console.log([...payload]);
+    console.log([...payload]);
 
-   fetch(url, {
-    method: "post",
-    body: payload,        
-    })
-    .then((res) => res.json())
-    .then((data) => console.log('newBlogPost entry data here: ', data))
-    .catch((err) => console.log(err));
-    window.location.reload()
+    fetch(url, {
+        method: "post",
+        body: payload,        
+        })
+        .then((res) => res.json())
+        .then((data) => console.log('newBlogPost entry data here: ', data))
+        .catch((err) => console.log(err));
+        window.location.reload()
 }
 
 /************************This makes the "Post a GIF" button clickable and send the entered text to backend to store the data  */
@@ -95,6 +65,7 @@ function writeNewPost() {
 
 /********************************************************************** Here the webpage is getting loaded */
 function loadInitialPage (data) {
+
   const blogLength = Object.keys(data).length
 
 /************** Loop through the database JSON file in the backend. All elements will be created as many times as many posts are saved in the database */
@@ -245,7 +216,6 @@ function loadInitialPage (data) {
               window.location.reload()
           }
       )
-                           /*deleted this line. Its not needed because emoji is always on page **** Jonny */
           likeCounter.textContent = data[i]['like']['number']
     }
     
@@ -262,9 +232,6 @@ function loadInitialPage (data) {
         createFunnyEmoji.setAttribute('src', '/client/assets/emojis/funny.png')
         createFunnyEmoji.setAttribute('class', 'svg-funny')
         
-       
-
-
         const funnyCounter = document.createElement('div')
         
         funnyButton.append(createFunnyEmoji)              /*inserts funny image inside button **** Jonny */
@@ -330,8 +297,7 @@ function loadInitialPage (data) {
                       window.location.reload()
                   }
               )
-                   /*deleted this line its not needed because emoji is always on page **** Jonny */
-                  funnyCounter.textContent = data[i]['funny']['number']
+              funnyCounter.textContent = data[i]['funny']['number']
             }
         }   
 
@@ -344,16 +310,9 @@ function loadInitialPage (data) {
         angryButton.setAttribute('class', `angry-button`)
         
         
-        
-
-
-        
         const createAngryEmoji = document.createElement('img')
         createAngryEmoji.setAttribute('src', '/client/assets/emojis/angry.png')
         createAngryEmoji.setAttribute('class', 'svg-angry')
-
-        
-  
         
 
         angryButton.append(createAngryEmoji)/*inserts angry image inside button **** Jonny */
@@ -433,7 +392,9 @@ function loadInitialPage (data) {
    
      const prePayload = new FormData(replyForm);
      const payload = new URLSearchParams(prePayload);
-   
+    
+    console.log('payload: ', payload)
+
      fetch(url, {
       method: "post",
       body: payload,
@@ -441,16 +402,11 @@ function loadInitialPage (data) {
       .then((res) => res.json())
       .then((data) => console.log('how does the data look like after fetching: ', data))
       .catch((err) => console.log('Error while post fetching: ', err));
-    //   window.scrollTo(scrollX, scrollY)
-    //   console.log('scroll after scrollto: ', scrollY)
       window.location.reload()
-    //   console.log('scroll after window reload: ', scrollY)
 
    })
-  
 }
-window.scrollTo(scrollX, scrollY)
-
+console.log('end of loading page')
 }
 
 
@@ -461,8 +417,7 @@ function getData() {
   fetch(url)
     .then(res => res.json())
     .then(data => {
-      loadInitialPage(data)
-      return data
+    loadInitialPage(data);
     })
     .catch(err => {
       console.log("Sorry! Your request could not be granted!", err)
@@ -471,25 +426,30 @@ function getData() {
     })
 }
 
+function scrollToActivity(xAxis, yAxis) {
+    console.log('Scrolled to: ', xAxis, yAxis)
+    window.scrollTo(xAxis, yAxis)
+}
+
 window.addEventListener('load', () => {
     getData()
     // window.scrollTo(scrollX, scrollY)
 })
 
-// function windowScroll() 
-    window.addEventListener("scroll", (event) => {
-        scrollY = this.scrollY;
-        scrollX = this.scrollX;
-        console.log(scrollY);
-        console.log(scrollX);
-       
-        // displays scroll position on the page. This is just a test to see if I can do something with the scroll position
-        let demo = document.getElementById('demo')
-        demo.innerText = `scrollY: ${scrollY}, scrollX: ${scrollX}`
+
+window.addEventListener("scroll", (event) => {
+    scrollY = this.scrollY;
+    scrollX = this.scrollX;
+    console.log(scrollY);
+    console.log(scrollX);
     
-    });
+    // displays scroll position on the page. This is just a test to see if I can do something with the scroll position
+    let demo = document.getElementById('demo')
+    demo.innerText = `scrollY: ${scrollY}, scrollX: ${scrollX}`
 
+});
 
+console.log('Bottom of the page')
 
 // module.exports = {
 //     getData
