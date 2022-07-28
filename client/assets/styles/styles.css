@@ -10,6 +10,7 @@ body {
 header {
   position: sticky;
   top: 0;
+ 
 }
 
 header,
@@ -20,22 +21,20 @@ footer {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem;
+  padding-left:3rem;
+  padding-right:3rem
 }
 
-.car1 {
-  height: 12vw;
-  padding-right: 1rem;
+.car1, .car2 {
+width:5rem
 }
 
-.car2 {
-  width: 12vw;
-  padding-right: 1rem;
-  transform: rotateY(180deg);
-}
+
 
 .title {
   font-family: "Tangerine", cursive;
-  font-size: 6.5vw;
+  font-size: 5rem;
+  font-weight: bold;
 }
 
 .col {
@@ -55,18 +54,18 @@ footer {
 .about-blog {
   text-align: center;
   font-family: "Edu NSW ACT Foundation", cursive;
-  font-size: 3.5vw;
+  font-size: 2.2rem;
   color: rgb(0, 0, 0);
   margin-top: 2rem;
 }
 
 .forms-wrapper {
   display: flex;
-  justify-content: space-evenly;
-  width: 100%;
+  justify-content: space-between;
+  width: 55%;
   margin: auto;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
 }
 
 #loading-box {
@@ -79,7 +78,7 @@ footer {
 }
 
 .gif-class {
-  width: 25vw;
+  width: 45vw;
 }
 
 
@@ -131,8 +130,8 @@ footer {
 }
 
 .reply-box div {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 
@@ -177,14 +176,68 @@ footer {
   cursor: pointer;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1100px) {
+  .forms-wrapper {
+    width:60%
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .forms-wrapper {
+    width:70%
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .forms-wrapper {
+    width:90%;
+    padding-left:2rem;
+    padding-right:2rem
+  }
+
+  
+
+}
+
+@media screen and (max-width: 790px) {
   .forms-wrapper {
     flex-wrap: wrap;
   }
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 730px) {
+  .forms-wrapper {
+    
+    width:70%;
+    margin:auto;
+    margin-top:2rem
+  }
+}
 
+@media screen and (max-width: 630px) {
+  .forms-wrapper {
+    
+    margin:auto;
+    margin-top:2rem
+  }
+
+  .car1, .car2 {
+    display:none
+    }
+    
+    header{justify-content: center;}
+
+}
+
+
+@media screen and (max-width: 370px) {
+  .reply-field {
+    width: 80%;
+  }
+  .reply-btn {
+    width: 25%;
+    font-size: 8px;
+  }
   }
 
 @media screen and (max-width: 400px) {
@@ -192,4 +245,11 @@ footer {
     flex-wrap: wrap;
     flex-direction: row;
   }
+  #buggati, #lambo {
+    display: none;
+  }
+  .reply-field {
+    width: 80%;
+  }
 } 
+
