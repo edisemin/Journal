@@ -50,7 +50,6 @@ function writeNewPost() {
                body: JSON.stringify(gifs.data[Math.floor(Math.random() * Object.entries(gifs.data).length)])
                 }).catch(err => {
                     console.log('error while fetching / sending gif: ', err);
-                    // document.getElementById('loading-box').textContent = ''
                     window.location.reload()
                 })
         } catch (error) {
@@ -91,7 +90,7 @@ function loadInitialPage (data) {
     replyBox.setAttribute('class', 'reply-box')
 
         const repliesAmount = data[i]['replies'].length
-        for (let j = 0; j < repliesAmount; j++) {
+        for (let j = repliesAmount; j > 0; j--) {
             const replySubBox =  document.createElement('div')
             replySubBox.textContent = data[i]['replies'][j]
             replyBox.appendChild(replySubBox)
@@ -106,7 +105,7 @@ function loadInitialPage (data) {
     inputField.setAttribute('type', 'text')
     inputField.setAttribute('name', `reply-${i}`)
     inputField.setAttribute('class', `reply-field`)
-    inputField.setAttribute('placeholder', 'write a COMMENT...')
+    inputField.setAttribute('placeholder', 'write a comment...')
     replyForm.appendChild(inputField)
     
     const submitButton = document.createElement('button') // The submit button
