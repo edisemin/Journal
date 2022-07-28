@@ -17,15 +17,22 @@ footer {
   background-color: skyblue;
   display: flex;
 
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 0.5rem;
 }
 
-.book {
+.car1 {
   width: 3.75rem;
   height: 4.38rem;
   padding-right: 1rem;
+}
+
+.car2 {
+  width: 3.75rem;
+  height: 4.38rem;
+  padding-right: 1rem;
+  transform: rotateY(180deg);
 }
 
 .title {
@@ -33,18 +40,19 @@ footer {
   font-size: 3.5rem;
 }
 
-.hero-section {
-  width: 56%;
-  margin: auto;
+.col {
+  width: 700px;
 }
 
-img {
+.images {
   width: 100%;
-  height: auto;
+  height: 100%;
 }
+
 .img-section {
   display: flex;
-}
+  width: 100%;
+} 
 
 .about-blog {
   text-align: center;
@@ -62,6 +70,10 @@ img {
   margin: auto;
   margin-top: 2rem;
   margin-bottom: 2rem;
+}
+
+@media screen and (max-width: 400px) {
+  
 }
 
 .form_main input,
