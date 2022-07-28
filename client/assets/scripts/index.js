@@ -4,10 +4,8 @@ const main = document.querySelector('#blog-posts')
 const newPostButton = document.getElementById('btn-two')
 const newGIFPostButton = document.getElementById('gif-btn')
 
-
-
-const url = "https://community-journaling.herokuapp.com";   // uncomment to use the backend server to fetch data
-//const url = "http://localhost:3000";                // uncomment to use the localhost to fetch data
+// const url = "https://community-journaling.herokuapp.com";   // uncomment to use the backend server to fetch data
+const url = "http://localhost:3000";                // uncomment to use the localhost to fetch data
 
 
 
@@ -32,30 +30,33 @@ function writeNewPost() {
     window.location.reload()
 }
 
-/*********************************************************************************88***This fetches a GIF URL related to the input field content  */
-
-        // async function getGif () {
-        //     const userInput = await document.getElementById(`gif-input-field`).value
-        //     const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=zdlCdp0EGvd7yxHXu5B7ywlPueKFWe5w&q=${userInput}`)
-        //     const gifs = await response.json()
-        //     return gifs.data[0]
-        // }
-
 /************************This makes the "Post a GIF" button clickable and send the entered text to backend to store the data  */
-   newGIFPostButton.addEventListener('click', async () => {
-      
-        const userInput = await document.getElementById(`gif-input-field`).value
-        const gifResponse = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=zdlCdp0EGvd7yxHXu5B7ywlPueKFWe5w&q=${userInput}`)
-        const gifs = await gifResponse.json()
-        // const bodyToSend = JSON.stringify(gifs.data[0]['embed_url'])
-        const dataToSend = await fetch(url, {
-           method: 'POST',
-           headers: {
-               'Content-Type': 'application/json'
-           },
-           body: JSON.stringify(gifs.data[0])
-            }).catch(err => console.log('error while fetching / sending gif'))
-            console.log('dataToSend: ', dataToSend)
+   newGIFPostButton.addEventListener('click', async (e) => {
+
+        e.preventDefault()
+
+        document.getElementById('loading-box').textContent = 'Loading...'
+
+        try {
+            const userInput = await document.getElementById(`gif-input-field`).value
+            const gifResponse = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=zdlCdp0EGvd7yxHXu5B7ywlPueKFWe5w&q=${userInput}`)
+            const gifs = await gifResponse.json()
+                // throw error                      // uncomment for testing fetch failure
+            fetch(url, {
+               method: 'POST',
+               headers: {
+                   'Content-Type': 'application/json'
+               },
+               body: JSON.stringify(gifs.data[Math.floor(Math.random() * Object.entries(gifs.data).length)])
+                }).catch(err => {
+                    console.log('error while fetching / sending gif: ', err);
+                    window.location.reload()
+                })
+        } catch (error) {
+            document.getElementById('loading-box').textContent = 'Fetching data failed, try again later.'
+            console.log('Error message: ', error)
+        }
+
         }
    )
 
@@ -89,7 +90,7 @@ function loadInitialPage (data) {
     replyBox.setAttribute('class', 'reply-box')
 
         const repliesAmount = data[i]['replies'].length
-        for (let j = 0; j < repliesAmount; j++) {
+        for (let j = repliesAmount; j > 0; j--) {
             const replySubBox =  document.createElement('div')
             replySubBox.textContent = data[i]['replies'][j]
             replyBox.appendChild(replySubBox)
@@ -104,7 +105,7 @@ function loadInitialPage (data) {
     inputField.setAttribute('type', 'text')
     inputField.setAttribute('name', `reply-${i}`)
     inputField.setAttribute('class', `reply-field`)
-    inputField.setAttribute('placeholder', 'write a COMMENT...')
+    inputField.setAttribute('placeholder', 'write a comment...')
     replyForm.appendChild(inputField)
     
     const submitButton = document.createElement('button') // The submit button
@@ -145,8 +146,15 @@ function loadInitialPage (data) {
         likeCounter.setAttribute('class', 'like-counter')
         likeCounter.textContent = data[i]['like']['number']
 
+
+        if(likeCounter.textContent == 0){          /** Hides counter if value is zero **** Jonny  */
+        likeCounter.style.display = 'none' 
+    }else { likeCounter.style.display = 'block'}
+
+
+
       if (!data[i]['like']['is-there']) {                 // This conditional comes true if there is no "like" at this the blogpost for now
-      console.log('There is no "like" emoji')
+      
               
     /*************************This makes the like button clickable and let the backend know if this button is clicked */
       document.getElementById(`like-button-${i}`).addEventListener('click', 
@@ -224,10 +232,14 @@ function loadInitialPage (data) {
         funnyCounter.setAttribute('class', 'funny-counter')
         funnyCounter.textContent = data[i]['funny']['number']
 
+        if(funnyCounter.textContent == 0){          /** Hides counter if value is zero **** Jonny  */
+        funnyCounter.style.display = 'none' 
+    }else { funnyCounter.style.display = 'block'}
+
         function funnyChecker() {
 
         if (!data[i]['funny']['is-there']) {
-              console.log('There is no "funny" emoji')
+              
                       
               document.getElementById(`funny-button-${i}`).addEventListener('click', 
                         function addFunny() {
@@ -309,13 +321,16 @@ function loadInitialPage (data) {
         angryButton.appendChild(angryCounter) /* inserts angry counter inside angry button **** Jonny */
 
         angryCounter.setAttribute('class', 'angry-counter')
+       
+    
         angryCounter.textContent = data[i]['angry']['number']
 
-     
+        if(angryCounter.textContent == 0){          /** Hides counter if value is zero **** Jonny*/
+            angryCounter.style.display = 'none' 
+        }else { angryCounter.style.display = 'block'}
 
         function angryChecker () {
           if (!data[i]['angry']['is-there']) {
-              console.log('There is no "angry" emoji')
                       
               document.getElementById(`angry-button-${i}`).addEventListener('click', 
                         function addAngry() {
@@ -409,5 +424,6 @@ function getData() {
     })
 }
 
-
-getData()
+window.addEventListener('load', () => {
+    getData()
+})
