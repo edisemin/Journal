@@ -4,8 +4,21 @@ const main = document.querySelector('#blog-posts')
 const newPostButton = document.getElementById('btn-two')
 const newGIFPostButton = document.getElementById('gif-btn')
 
+<<<<<<< HEAD
 // const url = "https://community-journaling.herokuapp.com";   // uncomment to use the backend server to fetch data
 const url = "http://localhost:3000";                // uncomment to use the localhost to fetch data
+=======
+        
+
+
+
+  
+
+
+
+const url = "https://community-journaling.herokuapp.com";   // uncomment to use the backend server to fetch data
+//const url = "http://localhost:3000";                // uncomment to use the localhost to fetch data
+>>>>>>> jonny
 
 
 
@@ -88,7 +101,8 @@ function loadInitialPage (data) {
     /************************************************************This creates the container with replies and the reply input form */
     const replyBox = document.createElement('div')
     replyBox.setAttribute('class', 'reply-box')
-
+    
+    
         const repliesAmount = data[i]['replies'].length
         for (let j = repliesAmount; j > 0; j--) {
             const replySubBox =  document.createElement('div')
@@ -105,7 +119,12 @@ function loadInitialPage (data) {
     inputField.setAttribute('type', 'text')
     inputField.setAttribute('name', `reply-${i}`)
     inputField.setAttribute('class', `reply-field`)
+<<<<<<< HEAD
     inputField.setAttribute('placeholder', 'write a comment...')
+=======
+    inputField.setAttribute('placeholder', 'write a COMMENT...')
+    inputField.setAttribute('maxlength', 200)   //******************Restrict charactor input  **** Jonny */
+>>>>>>> jonny
     replyForm.appendChild(inputField)
     
     const submitButton = document.createElement('button') // The submit button
@@ -115,6 +134,9 @@ function loadInitialPage (data) {
     submitButton.textContent = 'Reply'
     replyForm.appendChild(submitButton)
     
+
+    
+
     /************************************************************Append the reply container to the main blogpost text */
     blogPostContainer.appendChild(replyBox)
 
@@ -424,6 +446,14 @@ function getData() {
     })
 }
 
+<<<<<<< HEAD
 window.addEventListener('load', () => {
     getData()
 })
+=======
+
+getData()
+
+
+
+>>>>>>> jonny
