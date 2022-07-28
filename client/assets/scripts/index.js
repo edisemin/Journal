@@ -91,7 +91,7 @@ function loadInitialPage (data) {
     
     
         const repliesAmount = data[i]['replies'].length
-        for (let j = repliesAmount; j > 0; j--) {
+        for (let j = repliesAmount; j >= 0; j--) {
             const replySubBox =  document.createElement('div')
             replySubBox.textContent = data[i]['replies'][j]
             replyBox.appendChild(replySubBox)
