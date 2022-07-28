@@ -112,7 +112,10 @@ function loadInitialPage (data) {
       blogPostContainer.appendChild(gifImageTag)
         
     } else {
-        blogPostContainer.textContent = data[i]['body']
+        const blogPostText = document.createElement('div')
+        blogPostText.setAttribute('class', 'blog-post-text')
+        blogPostText.textContent = data[i]['body']
+        blogPostContainer.appendChild(blogPostText)
     }
 
     main.appendChild(blogPostContainer)
