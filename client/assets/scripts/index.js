@@ -4,44 +4,8 @@ const main = document.querySelector('#blog-posts')
 const newPostButton = document.getElementById('btn-two')
 const newGIFPostButton = document.getElementById('gif-btn')
 
-<<<<<<< HEAD
 // const url = "https://community-journaling.herokuapp.com";   // uncomment to use the backend server to fetch data
 const url = "http://localhost:3000";                // uncomment to use the localhost to fetch data
-=======
-const url = "https://community-journaling.herokuapp.com";   // uncomment to use the backend server to fetch data
-//const url = "http://localhost:3000";                // uncomment to use the localhost to fetch data
-
-let scrollX;
-let scrollY;
-
-
-
-
-
-
-// this gets the current scroll position and logs to the console
-
-
-//
-
-// this fuction will scroll to 100px from the top on click of html div
-// function scrollFuntion(){
-    
-//     document.documentElement.scrollTop = document.body.scrollTop = 100;
-//     console.log()
-// }
-
-// apparently this is how local storage is used. when the page is refreshed you will still see the name smith
-
-
-
-
-
-
-
-
-
->>>>>>> 329dbc3dc10d298c9ed45168bf6a3d13674e65c0
 
 
 document.addEventListener('submit', (e)=> e.preventDefault())
