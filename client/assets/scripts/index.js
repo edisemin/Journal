@@ -35,23 +35,28 @@ function writeNewPost() {
 
         e.preventDefault()
 
-        document.getElementById('loading-box').textContent = 'Loading...'
+        document.getElementById('loading-box').textContent = 'Loading... please wait'
 
-        const userInput = await document.getElementById(`gif-input-field`).value
-        const gifResponse = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=zdlCdp0EGvd7yxHXu5B7ywlPueKFWe5w&q=${userInput}`)
-        const gifs = await gifResponse.json()
-        // const bodyToSend = JSON.stringify(gifs.data[0]['embed_url'])
-        fetch(url, {
-           method: 'POST',
-           headers: {
-               'Content-Type': 'application/json'
-           },
-           body: JSON.stringify(gifs.data[Math.floor(Math.random() * Object.entries(gifs.data).length)])
-            }).catch(err => {
-                console.log('error while fetching / sending gif: ', err);
-                // document.getElementById('loading-box').textContent = ''
-                window.location.reload()
-            })
+        try {
+            const userInput = await document.getElementById(`gif-input-field`).value
+            const gifResponse = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=zdlCdp0EGvd7yxHXu5B7ywlPueKFWe5w&q=${userInput}`)
+            const gifs = await gifResponse.json()
+                // throw error                      // uncomment for testing fetch failure
+            fetch(url, {
+               method: 'POST',
+               headers: {
+                   'Content-Type': 'application/json'
+               },
+               body: JSON.stringify(gifs.data[Math.floor(Math.random() * Object.entries(gifs.data).length)])
+                }).catch(err => {
+                    console.log('error while fetching / sending gif: ', err);
+                    window.location.reload()
+                })
+        } catch (error) {
+            document.getElementById('loading-box').textContent = 'Fetching data failed, try again later.'
+            console.log('Error message: ', error)
+        }
+
         }
    )
 
@@ -83,9 +88,10 @@ function loadInitialPage (data) {
     /************************************************************This creates the container with replies and the reply input form */
     const replyBox = document.createElement('div')
     replyBox.setAttribute('class', 'reply-box')
-
+    
+    
         const repliesAmount = data[i]['replies'].length
-        for (let j = 0; j < repliesAmount; j++) {
+        for (let j = repliesAmount; j >= 0; j--) {
             const replySubBox =  document.createElement('div')
             replySubBox.textContent = data[i]['replies'][j]
             replyBox.appendChild(replySubBox)
@@ -101,6 +107,7 @@ function loadInitialPage (data) {
     inputField.setAttribute('name', `reply-${i}`)
     inputField.setAttribute('class', `reply-field`)
     inputField.setAttribute('placeholder', 'write a COMMENT...')
+    inputField.setAttribute('maxlength', 200)   //******************Restrict charactor input  **** Jonny */
     replyForm.appendChild(inputField)
     
     const submitButton = document.createElement('button') // The submit button
@@ -110,6 +117,9 @@ function loadInitialPage (data) {
     submitButton.textContent = 'Reply'
     replyForm.appendChild(submitButton)
     
+
+    
+
     /************************************************************Append the reply container to the main blogpost text */
     blogPostContainer.appendChild(replyBox)
 
@@ -121,19 +131,32 @@ function loadInitialPage (data) {
     likeButton.setAttribute('type', 'submit')
     likeButton.setAttribute('id', `like-button-${i}`)
     likeButton.setAttribute('class', `like-button`)
-    likeButton.textContent = 'Like'
+    
 
     /************************************************************This creates the like emoji */
 
     const createLikeEmoji = document.createElement('img')
-    createLikeEmoji.setAttribute('src', '/client/assets/emojis/like.svg')
+    createLikeEmoji.setAttribute('src', '/client/assets/emojis/like.png')
     createLikeEmoji.setAttribute('class', 'svg-like')
-
+ const likeImg = document.querySelector('.svg-like')
     /************************************************************This creates the like counter */
         const likeCounter = document.createElement('div')
-        blogPostContainer.appendChild(likeCounter)
+
+        
+        likeButton.append(createLikeEmoji)   /*inserts like image inside button **** Jonny */
+       
+
+        likeButton.appendChild(likeCounter)    /*inserts counter inside button **** Jonny */
+
         likeCounter.setAttribute('class', 'like-counter')
         likeCounter.textContent = data[i]['like']['number']
+
+
+        if(likeCounter.textContent == 0){          /** Hides counter if value is zero **** Jonny  */
+        likeCounter.style.display = 'none' 
+    }else { likeCounter.style.display = 'block'}
+
+
 
       if (!data[i]['like']['is-there']) {                 // This conditional comes true if there is no "like" at this the blogpost for now
       
@@ -142,7 +165,7 @@ function loadInitialPage (data) {
       document.getElementById(`like-button-${i}`).addEventListener('click', 
                 function addLike() {
                 console.log('im within addLike function')
-                replyForm.appendChild(createLikeEmoji)
+                createLikeEmoji.style = '  transform: rotate(-60deg)'        /* rotate emoji **** Jonny */
                   
           const http = new XMLHttpRequest();
           
@@ -167,7 +190,7 @@ function loadInitialPage (data) {
         document.getElementById(`like-button-${i}`).addEventListener('click', 
           function incrementLike() {
               console.log('im within addLike function')
-              replyForm.appendChild(createLikeEmoji)
+              createLikeEmoji.style = '  transform: rotate(-60deg)'   /* rotate emoji **** Jonny */
                       
               const http = new XMLHttpRequest();
               
@@ -187,7 +210,7 @@ function loadInitialPage (data) {
               window.location.reload()
           }
       )
-          replyForm.appendChild(createLikeEmoji)
+                           /*deleted this line. Its not needed because emoji is always on page **** Jonny */
           likeCounter.textContent = data[i]['like']['number']
     }
     
@@ -197,16 +220,26 @@ function loadInitialPage (data) {
         funnyButton.setAttribute('type', 'submit')
         funnyButton.setAttribute('id', `funny-button-${i}`)
         funnyButton.setAttribute('class', `funny-button`)
-        funnyButton.textContent = 'Funny'
+        
+
 
         const createFunnyEmoji = document.createElement('img')
-        createFunnyEmoji.setAttribute('src', '/client/assets/emojis/funny.svg')
+        createFunnyEmoji.setAttribute('src', '/client/assets/emojis/funny.png')
         createFunnyEmoji.setAttribute('class', 'svg-funny')
+        
+       
+
 
         const funnyCounter = document.createElement('div')
-        blogPostContainer.appendChild(funnyCounter)
+        
+        funnyButton.append(createFunnyEmoji)              /*inserts funny image inside button **** Jonny */
+        funnyButton.appendChild(funnyCounter)
         funnyCounter.setAttribute('class', 'funny-counter')
         funnyCounter.textContent = data[i]['funny']['number']
+
+        if(funnyCounter.textContent == 0){          /** Hides counter if value is zero **** Jonny  */
+        funnyCounter.style.display = 'none' 
+    }else { funnyCounter.style.display = 'block'}
 
         function funnyChecker() {
 
@@ -216,7 +249,7 @@ function loadInitialPage (data) {
               document.getElementById(`funny-button-${i}`).addEventListener('click', 
                         function addFunny() {
                         console.log('im within addFunny function')
-                        replyForm.appendChild(createFunnyEmoji)
+                        createFunnyEmoji.style = '  transform: rotate(-60deg)' /* rotate emoji **** Jonny */    
                           
                   const http = new XMLHttpRequest();
                   
@@ -242,7 +275,7 @@ function loadInitialPage (data) {
                 document.getElementById(`funny-button-${i}`).addEventListener('click', 
                   function incrementFunny() {
                       console.log('im within incrementFunny function')
-                      replyForm.appendChild(createFunnyEmoji)
+                      createFunnyEmoji.style = '  transform: rotate(-60deg)' /* rotate emoji **** Jonny */
                               
                       const http = new XMLHttpRequest();
                       
@@ -262,7 +295,7 @@ function loadInitialPage (data) {
                       window.location.reload()
                   }
               )
-                  replyForm.appendChild(createFunnyEmoji)
+                   /*deleted this line its not needed because emoji is always on page **** Jonny */
                   funnyCounter.textContent = data[i]['funny']['number']
             }
         }   
@@ -274,16 +307,32 @@ function loadInitialPage (data) {
         angryButton.setAttribute('type', 'submit')
         angryButton.setAttribute('id', `angry-button-${i}`)
         angryButton.setAttribute('class', `angry-button`)
-        angryButton.textContent = 'Angry'
+        
+        
+        
 
+
+        
         const createAngryEmoji = document.createElement('img')
-        createAngryEmoji.setAttribute('src', '/client/assets/emojis/angry.svg')
+        createAngryEmoji.setAttribute('src', '/client/assets/emojis/angry.png')
         createAngryEmoji.setAttribute('class', 'svg-angry')
 
+        
+  
+        
+
+        angryButton.append(createAngryEmoji)/*inserts angry image inside button **** Jonny */
         const angryCounter = document.createElement('div')
-        blogPostContainer.appendChild(angryCounter)
+        angryButton.appendChild(angryCounter) /* inserts angry counter inside angry button **** Jonny */
+
         angryCounter.setAttribute('class', 'angry-counter')
+       
+    
         angryCounter.textContent = data[i]['angry']['number']
+
+        if(angryCounter.textContent == 0){          /** Hides counter if value is zero **** Jonny*/
+            angryCounter.style.display = 'none' 
+        }else { angryCounter.style.display = 'block'}
 
         function angryChecker () {
           if (!data[i]['angry']['is-there']) {
@@ -291,7 +340,7 @@ function loadInitialPage (data) {
               document.getElementById(`angry-button-${i}`).addEventListener('click', 
                         function addAngry() {
                         console.log('im within addAngry function')
-                        replyForm.appendChild(createAngryEmoji)
+                        createAngryEmoji.style = '  transform: rotate(-60deg)' /* rotate emoji **** Jonny */
                           
                   const http = new XMLHttpRequest();
                   
@@ -317,7 +366,7 @@ function loadInitialPage (data) {
                 document.getElementById(`angry-button-${i}`).addEventListener('click', 
                   function incrementAngry() {
                       console.log('im within incrementAngry function')
-                      replyForm.appendChild(createAngryEmoji)
+                      createAngryEmoji.style = '  transform: rotate(-60deg)' /* rotate emoji **** Jonny */
                               
                       const http = new XMLHttpRequest();
                       
@@ -337,7 +386,7 @@ function loadInitialPage (data) {
                       window.location.reload()
                   }
               )
-                  replyForm.appendChild(createAngryEmoji)
+                          /*deleted this line its not needed because emoji is always on page **** Jonny */
                   angryCounter.textContent = data[i]['angry']['number']
             }
         }
@@ -380,5 +429,6 @@ function getData() {
     })
 }
 
-
-getData()
+window.addEventListener('load', () => {
+    getData()
+})

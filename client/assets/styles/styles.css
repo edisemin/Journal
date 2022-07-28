@@ -1,143 +1,186 @@
-*{margin:0;
-  padding:0}
-  
-  body {
-    background-color: lightblue;
-  }
-  
-  
-  header, footer {
-    background-color: skyblue;
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-  }
-  
-  .book {
-    width: 3.75rem;
-    height: 4.38rem;
-    padding-right: 1rem;
-  }
-  
-  .title {
-    font-family: 'Tangerine', cursive;
-    font-size: 3.5rem;
-  }
-  
-  .hero-section{width:56%;
-  margin:auto}
-  
-  img {
-    width: 100%;
-    height: auto;
-  }
-  .img-section {
-     display: flex;
-  }
-  
-  .about-blog {
-    text-align: center;
-    font-family: 'Edu NSW ACT Foundation', cursive;
-    font-size: 2rem;
-    font-size: 3.5vw;
-    color: rgb(20, 81, 248);
-  }
-  
-  
-      .content {
-          display: grid;
-          grid-template-columns: 1fr ;
-          grid-template-rows: auto;
-          width: 50%;
-          margin: auto;
-          margin-top: 4rem;
-          
-          align-items:center;
-          text-align: left;
-        
-          border-radius: 1rem;
-          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-          padding:2rem;
-          background-color: white;
-        }
-      
-      
-        .content p {
-          
-          z-index:10;
-         
-         
-          padding-left:2rem;
-          padding:2rem;
-          margin:1rem;
-          background-color:white;
-          border-bottom:1px solid rgb(192, 191, 191)
-         }
-  
-       
-      
-      
-        #form{
-          display:flex;
-          justify-content: space-between;
-          
-          padding-top:40px;
-          padding-bottom:40px;
-      margin-bottom:40px;
-      border-bottom:5px solid black
-      }
-      
-      #form input[type=text]{border:none;
-        outline: none;
-  
-        }
-  
-     
-     #btn{background-color:rgb(62, 62, 243);
-    border:none;
-  padding:.5rem;
-  color:white;
-  border-radius:.5rem;
-  }
-  
-  .form_main, .form_gif{
-    display:flex;
-    justify-content: center;
-  width: 56%;
-  margin:auto;
-  margin-top:40px;
-  margin-bottom:0px;
-  }
-  
-  .form_main input, .form_gif input {
-    width: 100%;
-    border:none;
-    padding:1rem;
-    border-radius:.5rem;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  }
-  
-  #btn-two, #gif-btn {background-color:rgb(20, 81, 248);
-    border:none;
-  padding:1rem;
-  color:white;
-  border-radius:.5rem;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  }
-  
-  .form_gif {
-    margin-top: 0;
-  }
-  
-  .svg-like, .svg-funny, .svg-angry {
-    width: 20px;
-    height: 20px
-  }
-  
-  .reply-form {
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: lightblue;
+}
+
+header {
+  position: sticky;
+  top: 0;
+}
+
+header,
+footer {
+  background-color: skyblue;
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.car1 {
+  width: 3.75rem;
+  height: 4.38rem;
+  padding-right: 1rem;
+}
+
+.car2 {
+  width: 3.75rem;
+  height: 4.38rem;
+  padding-right: 1rem;
+  transform: rotateY(180deg);
+}
+
+.title {
+  font-family: "Tangerine", cursive;
+  font-size: 3.5rem;
+}
+
+.col {
+  width: 700px;
+}
+
+.images {
+  width: 100%;
+  height: 100%;
+}
+
+.img-section {
+  display: flex;
+  width: 100%;
+} 
+
+.about-blog {
+  text-align: center;
+  font-family: "Edu NSW ACT Foundation", cursive;
+  font-size: 2rem;
+  font-size: 3.5vw;
+  color: rgb(0, 0, 0);
+  margin-top: 2rem;
+}
+
+.forms-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 55%;
+  margin: auto;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+#loading-box {
+  text-align: center;
+  font-family: "Edu NSW ACT Foundation", cursive;
+  font-size: 2rem;
+  font-size: 3.5vw;
+  color: rgb(0, 0, 0);
+  font-style: italic;
+}
+
+.gif-class {
+  width: 100%;
+}
+
+@media screen and (max-width: 500px) {
+  .forms-wrapper {
     display: flex;
     flex-wrap: wrap;
   }
-  
+
+}
+
+.form_main input,
+.form_gif input {
+  border: none;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+#btn-two,
+#gif-btn {
+  background-color: rgb(20, 81, 248);
+  border: none;
+  padding: 1rem;
+  color: white;
+  border-radius: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+  cursor: pointer;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  width: 50%;
+  margin: auto;
+  margin-top: 4rem;
+
+  text-align: left;
+
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 2rem;
+  background-color: white;
+  margin-bottom: 4rem;
+}
+
+.reply-box div {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+
+  border-bottom: 1px solid rgb(236, 236, 236);
+}
+
+.svg-like,
+.svg-funny,
+.svg-angry {
+  width: 20px;
+  height: 20px;
+  transition: 0.3s;
+}
+
+.svg-angry:hover {
+  transform: rotate(360deg);
+}
+
+.reply-form {
+  margin-top: 1rem;
+}
+
+.reply-field {
+  padding: 1rem;
+}
+
+#btn,
+.reply-btn {
+  background-color: rgb(62, 62, 243);
+  border: none;
+  padding: 0.8rem;
+  color: white;
+  border-radius: 0.5rem;
+  margin-left: 0.5rem;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+#btn,
+.reply-btn:hover {
+  background-color: rgb(36, 36, 209);
+}
+
+.like-button,
+.funny-button,
+.angry-button {
+  background-color: white;
+  border: none;
+  margin-left: 0.7rem;
+  cursor: pointer;
+}
