@@ -1,26 +1,28 @@
-# Community-Journaling- LAP 1 Project
+# Supercar Blog - LAP 1 Project
 
   Contributors:
 
-- [Edis Emin](./edis.md)
-- [Jonny Britton](./jonny.md)
-- [Mohammed Goni](./mohammed.md)
-- [Norbert Majer](./norbert.md)
+- [Edis Emin](https://github.com/edisemin)
+- [Jonny Britton](https://github.com/jbritttt)
+- [Mohammed Goni](https://github.com/MoGoni52)
+- [Norbert Majer](https://github.com/azotamiota)
 
-# Project Description
-This is a group project which required the team to build a website which enabled users 
-to visit a website and make anonymous post journal entries. Users have a limitation on 
-how many characters they can put in an entry and can also add gifs. They can also view other 
-people's entries as well as commenting and reacting to them with an emoji. 
+## Project Description
+This is a group project which required the team to build a website that enabled users 
+to visit and write anonymous blog posts and send GIFs. Users have a limitation on 
+how many characters they can put in an entry. They can also view other 
+people's entries or GIFs as well as comment and express their opinions with emojis. 
 
-The website can be viewed in this link:
+The website can be viewed at this link:
 
-## Installation & Usage
+[Supercar Blog](https://super-car-blog.netlify.app/)
+
+<!-- ## Installation & Usage
 
 ### Installation
 - Clone or download the repo.
 - Open terminal and navigate to .
-- Run npm install to install dependencies.
+- Run npm install to install dependencies. -->
 
 ### Usage
 - cd into the server folder and run the command npm run dev to launch the server.
