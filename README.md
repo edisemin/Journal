@@ -17,13 +17,6 @@ The website can be viewed at this link:
 
 [Supercar Blog](https://super-car-blog.netlify.app/)
 
-<!-- ## Installation & Usage
-
-### Installation
-- Clone or download the repo.
-- Open terminal and navigate to .
-- Run npm install to install dependencies. -->
-
 ### Usage
 - cd into the server folder and run the command npm run dev to launch the server.
 - Run npm test to launch the test suite.
