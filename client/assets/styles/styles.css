@@ -10,7 +10,6 @@ body {
 header {
   position: sticky;
   top: 0;
- 
 }
 
 header,
@@ -21,15 +20,14 @@ footer {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem;
-  padding-left:3rem;
-  padding-right:3rem
+  padding-left: 3rem;
+  padding-right: 3rem;
 }
 
-.car1, .car2 {
-width:5rem
+.car1,
+.car2 {
+  width: 5rem;
 }
-
-
 
 .title {
   font-family: "Tangerine", cursive;
@@ -49,7 +47,7 @@ width:5rem
 .img-section {
   display: flex;
   width: 100%;
-} 
+}
 
 .about-blog {
   text-align: center;
@@ -81,7 +79,6 @@ width:5rem
   width: 45vw;
 }
 
-
 .form_main input,
 .form_gif input {
   border: none;
@@ -101,14 +98,15 @@ width:5rem
 }
 
 #btn-two,
-#gif-btn, .reply-btn {
+#gif-btn,
+.reply-btn {
   background-color: rgb(20, 81, 248);
   border: none;
   padding: 1rem;
   color: white;
   border-radius: 0.5rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
+  width: 6rem;
   cursor: pointer;
 }
 
@@ -176,109 +174,116 @@ width:5rem
   cursor: pointer;
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1130px) {
   .forms-wrapper {
-    width:60%
-  }
-}
-
-@media screen and (max-width: 980px) {
-  .forms-wrapper {
-    width:70%
+    width: 70%;
   }
 }
 
 @media screen and (max-width: 880px) {
   .forms-wrapper {
-    width:90%;
-    padding-left:2rem;
-    padding-right:2rem
+    width: 80%;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
-
-  
-
 }
 
 @media screen and (max-width: 790px) {
   .forms-wrapper {
     flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .input-gif {
+    margin-top: 1rem;
+  }
+  .forms-wrapper {
+    justify-content: center;
   }
 }
 
 @media screen and (max-width: 730px) {
-  .forms-wrapper {
-    justify-content: center;
-    width:80%;
-    margin:auto;
-    margin-top:2rem
+  .reply-btn {
+    margin: 0;
+    width: 5rem;
   }
 
-  .input-gif{margin-top:1rem}
- 
+  .svg-like,
+  .svg-funny,
+  .svg-angry {
+    margin-top: 1rem;
+  }
 }
 
 @media screen and (max-width: 630px) {
   .forms-wrapper {
-    
-    margin:auto;
-    margin-top:2rem
+    margin: auto;
+    margin-top: 2rem;
   }
 
-  .car1, .car2 {
-    display:none
-    }
+  .car1,
+  .car2 {
+    display: none;
+  }
 
-    .title {
-     
-      font-size: 3rem;
-      }
+  .title {
+    font-size: 3rem;
+  }
 
- header{justify-content: center;}
- footer{justify-content: center;}
-
+  header {
+    justify-content: center;
+  }
+  footer {
+    justify-content: center;
+  }
 }
-
 
 @media screen and (max-width: 580px) {
-  
-  .svg-like,
-  .svg-funny,
-  .svg-angry {
-    margin-top:1rem
+  .about-blog {
+    font-size: 1.7rem;
   }
-  
-
-.about-blog {
- 
-  font-size: 1.7rem;
- 
 }
-
-}
-
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 446px) {
   .img-section {
     flex-wrap: wrap;
     flex-direction: row;
   }
-  #buggati, #lambo {
+  .gif-class {
+    width: 100%;
+  }
+  #buggati,
+  #lambo {
     display: none;
   }
   .reply-field {
     width: 80%;
   }
-} 
 
+  .forms-wrapper {
+    width: 95%;
+    padding: 0;
+  }
+
+  .content {
+    width: 60%;
+  }
+}
 
 @media screen and (max-width: 370px) {
   .reply-field {
     width: 80%;
   }
-  .reply-btn {
-    width: 25%;
-    font-size: 8px;
+  .forms-wrapper {
+    width: 90%;
+
+    margin: 0;
+    margin-left: 5%;
+    margin-top: 2rem;
   }
+  .form_main input,
+  .form_gif input {
+    width: 50%;
   }
-
-
-
+}
